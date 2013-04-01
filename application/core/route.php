@@ -2,7 +2,7 @@
 class Route
 {
     static function start()
-    {
+    {  
         // контроллер и действие по умолчанию
         $controller_name = 'Main';
         $action_name = 'index';
@@ -48,6 +48,7 @@ class Route
             правильно было бы кинуть здесь исключение,
             но для упрощения сразу сделаем редирект на страницу 404
             */
+            
             Route::ErrorPage404();
         }
         
@@ -58,14 +59,18 @@ class Route
         if(method_exists($controller, $action))
         {
             // вызываем действие контроллера
-            $controller->$action();
+
+            // передаем все нужные параметры
+            if (isset($routes[3]))
+                $controller->$action($routes[3]);
+            else
+                $controller->$action(null);
         }
         else
         {
             // здесь также разумнее было бы кинуть исключение
             Route::ErrorPage404();
         }
-    
     }
     
     function ErrorPage404()
@@ -74,6 +79,11 @@ class Route
         header('HTTP/1.1 404 Not Found');
         header("Status: 404 Not Found");
         header('Location:'.$host.'404');
+    }
+
+    function ErrorAccess()
+    {
+
     }
 }
 ?>

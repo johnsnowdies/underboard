@@ -9,8 +9,26 @@ class Controller_Main extends Controller
 
     function action_index()
     {	
-    	$data = $this->model->get_data();
-        $this->view->generate('main_view.php', 'template_view.php', $data);
+    	if(isset($_SESSION['user'])) {
+    		$data = $this->model->get_data();
+            $this->view->generate('main_view.php', 'template_view.php', $data);
+    	}
+    	else
+    		$this->view->generate('login_view.php', 'template_view.php');
+    }
+
+    function action_bad(){
+        if(!isset($_SESSION['user'])) {
+        
+        }   else self::action_index();
+
+    }
+
+    function action_thread($thread){
+        if(isset($_SESSION['user'])) {
+            echo $thread;
+        }else
+        header('Location: /');
     }
 }
 ?>
