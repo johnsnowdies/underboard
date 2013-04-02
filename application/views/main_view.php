@@ -11,8 +11,7 @@
         </div>
     </div>
 
-    <div class="modal" id="myModal" tabindex="-1" role="dialog" style="display:none;" aria-labelledby="myModalLabel"
-         area-hidden="true">
+    <div class="modal hide fade in large" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" area-hidden="true">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             <h3 id="myModalLabel">Новая тема</h3>
@@ -23,27 +22,27 @@
 
                 <input type="hidden" name="parent" value="0">
                 <div class="control-group">
-                    <label class="control-label" for="inputAuthor">Author</label>
+                    <label class="control-label" for="inputAuthor">Имя</label>
 
                     <div class="controls">
-                        <input type="text" id="inputAuthor" class="input-xlarge" name="author" value="Anonymous">
+                        <input type="text" id="inputAuthor" class="input-xxlarge" name="author" value="Anonymous">
                     </div>
                 </div>
 
                 <div class="control-group">
-                    <label class="control-label" for="inputTitle">Title</label>
+                    <label class="control-label" for="inputTitle">Заголовок</label>
 
                     <div class="controls">
-                        <input type="text" id="inputTitle" class="input-xlarge" name="title" placeholder="title">
+                        <input type="text" id="inputTitle" class="input-xxlarge" name="title" placeholder="">
                     </div>
                 </div>
 
                 <div class="control-group">
-                    <label class="control-label" for="inputBody">Body</label>
+                    <label class="control-label" for="inputBody">Сообщение</label>
 
                     <div class="controls">
-                        <textarea id="inputBody" class="input-xlarge" style="height:120px;" name="body"
-                                  placeholder="Body"></textarea>
+                        <textarea id="inputBody" class="input-xxlarge" style="height:120px;" name="body"
+                                  placeholder=""></textarea>
                     </div>
                 </div>
 
@@ -62,7 +61,7 @@
         while ($row = $data->fetch()) {
             ?>
             <div class="row">
-                <div class="span1"><span class="counter label label-inverse">15</span></div>
+                <div class="span1"><span class="counter label label-inverse"><? echo $row['count'];?></span></div>
                 <div class="span10 well">
                     <div class="row">
                         <div class="span9"><a href="/thread/show/<? echo $row['id']; ?>"><span

@@ -68,6 +68,14 @@
             font-size:3.2em;
             line-height: 40px;
         }
+
+        .modal{
+            color:#000;
+            width: 800px;
+            margin-left: -400px;
+        }
+
+
         
     </style>
 </head>

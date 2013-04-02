@@ -7,4 +7,4 @@ class Model_Main extends Model
         return $sth;
     }
 }
-?>t
+?>
