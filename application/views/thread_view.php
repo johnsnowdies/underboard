@@ -10,16 +10,18 @@ body{
 <?php 
 	  while ($row = $data['opener']->fetch()) { ?>
 
-    <div class="navbar navbar-inverse navbar-fixed-top">
-       <div class="navbar-inner">
-        <a class="brand" href="/">>underboard</a>
-        <ul class="nav">
-      <li><a href="/">Лобби</a></li>
-      <li class="active"><a href="/thread/show/<? echo $row['id'];?>"><span class="badge badge-important" style="float:right;">#<? echo $row['id'] ?></span></a></li>
-      <li><a href="/auth/logout">Выход</a></li>
-    </ul>
-  </div>
-</div>
+
+          <div class="navbar navbar-inverse navbar-fixed-top">
+              <div class="navbar-inner">
+                  <a class="brand" href="/">underboard</a>
+                  <ul class="nav">
+                      <li><a href="/"><i class="icon-home icon-white"></i>&nbsp;Лобби</a></li>
+                      <li class="active"><a href="/thread/show/<? echo $row['id'];?>"><span class="label label-important">Текущий тред: #<? echo $row['id'] ?></span></a></li>
+                      <li><a href="/auth/logout"><i class="icon-star icon-white"></i>&nbsp;Избранное</a></li>
+                      <li><a href="/auth/logout"><i class="icon-off icon-white"></i>&nbsp;Выход</a></li>
+                  </ul>
+              </div>
+          </div>
 
     <div class="row">
      
@@ -50,9 +52,8 @@ body{
           </div>
             <p class="postbody"><? echo $row['body'];?></p>
             <span class="label label-inverse">Написал <? echo $row['author'].' - '.$row['timestamp'];?></span>
-          </div>
-    
-  </div>
+      </div>
+    </div>
     <?
   }
   ?>

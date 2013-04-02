@@ -45,8 +45,28 @@
        }
 
 
-        .ub{
+        /* Change the docs' brand */
+        .navbar .brand {
+            padding-right: 20px;
+            padding-left: 0;
+            margin-left: 20px;
+
+            font-weight: bold;
+            color: #000;
+            text-shadow: 0 1px 0 rgba(255,255,255,.1), 0 0 30px rgba(255,255,255,.125);
+            -webkit-transition: all .2s linear;
+            -moz-transition: all .2s linear;
+            transition: all .2s linear;
+        }
+        .navbar .brand:hover {
+            text-decoration: none;
             color:#0099ff;
+            text-shadow: 0 1px 0 rgba(0,153,255,.1), 0 0 30px rgba(0,153,255,.4);
+        }
+
+        .counter{
+            font-size:3.2em;
+            line-height: 40px;
         }
         
     </style>
