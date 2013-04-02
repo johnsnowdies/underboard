@@ -11,6 +11,43 @@
         .container{
             margin-top:50px;
         }
+
+        body{
+            background-image: url('/img/low_contrast_linen.png');
+            color:#eee;
+        }
+
+        .well{
+            border-radius: 0;
+            padding: 0px 5px 5px 20px;
+            border: none;
+            background: none;
+            border-bottom: 1px dashed #3a3a3a;
+        }
+
+        .label-inverse{
+            color: #7a7a7a; 
+        }
+
+        .navbar{
+    
+        }
+
+       p.postbody{
+        text-align: justify;
+        font-family: helvetica;
+        
+       }
+
+       span.big{
+        font-size: 2em;
+        font-family: cambria;
+       }
+
+
+        .ub{
+            color:#0099ff;
+        }
         
     </style>
 </head>

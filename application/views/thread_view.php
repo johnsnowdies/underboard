@@ -1,11 +1,63 @@
 <style type="text/css">
 body{
-  background-color: #2a2a2a;
+  background-color: #363A3A;
 }
 </style>
 
 <div class="container">
-	<form action="<? echo "http://".$_SERVER['SERVER_NAME']."/reply";?>" class="form-horizontal" method="post">
+	
+
+<?php 
+	  while ($row = $data['opener']->fetch()) { ?>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+       <div class="navbar-inner">
+        <a class="brand" href="/">>underboard</a>
+        <ul class="nav">
+      <li><a href="/">Лобби</a></li>
+      <li class="active"><a href="/thread/show/<? echo $row['id'];?>"><span class="badge badge-important" style="float:right;">#<? echo $row['id'] ?></span></a></li>
+      <li><a href="/auth/logout">Выход</a></li>
+    </ul>
+  </div>
+</div>
+
+    <div class="row">
+     
+        <div class="span11 well">
+          <div class="row">
+            <div class="span10"><a href="/thread/show/<? echo $row['id'];?>"><span class="big"><? echo $row['title'];?></span> </a></div>
+            <div class="span1"><span class="badge badge-important" style="float:right;">#<? echo $row['id'] ?></span></div>
+          </div>
+            <p class="postbody"><? echo $row['body'];?></p>
+            <span class="label label-inverse">Написал <? echo $row['author'].' - '.$row['timestamp'];?></span>
+          </div>
+    </div>
+        
+    <?
+  }
+	?>
+
+	<?php 
+    while ($row = $data['postbody']->fetch()) { ?>
+
+
+    <div class="row">
+      <div class="span1"></div>
+        <div class="span10 well">
+          <div class="row">
+            <div class="span8"><a href="#<? echo $row['id'];?>"><span class="big"><? echo $row['title'];?></span> </a></div>
+            <div class="span2"><span class="badge badge-important" style="float:right;">#<? echo $row['id'] ?></span></div>
+          </div>
+            <p class="postbody"><? echo $row['body'];?></p>
+            <span class="label label-inverse">Написал <? echo $row['author'].' - '.$row['timestamp'];?></span>
+          </div>
+    
+  </div>
+    <?
+  }
+  ?>
+
+  <form action="<? echo "http://".$_SERVER['SERVER_NAME']."/reply";?>" class="form-horizontal well" method="post">
   <input type="hidden" name="parent" value="<? echo $id;?>"> 
   <div class="control-group">
     <label class="control-label" for="inputAuthor">Author</label>
@@ -35,25 +87,6 @@ body{
   </div>
 </form>
 
-<?php 
-	if($data!=null){
-	 while ($row = $data['opener']->fetch()) {
-      	echo '<div class="well"><h4>'.$row['title'].'</h4><p>'.$row['body'].'</p><p>'.$row['author'].' at '.$row['timestamp'].'</p></div>';
-    }}
-	
-	?>
 
-	<div class="row">
-		<div class="span2"></div>
-		<div class="span10">
-		<?php
-			if($data!=null){
-	 		while ($row = $data['postbody']->fetch()) {
-      			echo '<div class="well"><h4>'.$row['title'].'</h4><p>'.$row['body'].'</p><p>'.$row['author'].' at '.$row['timestamp'].'</p></div>';
-    		}}
-	
-	?>
 
-		</div>
-	</div>
 </div>

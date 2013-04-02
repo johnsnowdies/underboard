@@ -1,13 +1,8 @@
-<style type="text/css">
-body{
-  background-color: #2a2a2a;
-}
-</style>
 
 <div class="container">
  <div class="navbar navbar-inverse navbar-fixed-top">
   <div class="navbar-inner">
-    <a class="brand" href="/">Underboard</a>
+    <a class="brand" href="/">&nbsp <span class="ub">underboard</span></a>
     <ul class="nav">
       <li class="active"><a href="/">Лобби</a></li>
       <li><a href="#myModal" role="button" data-toggle="modal">Новая тема</a></li>
@@ -62,12 +57,14 @@ body{
 	 if($data!=null){
 	  while ($row = $data->fetch()) { ?>
     <div class="row">
-      <div class="span2"></div>
-      	<div class="span7 well">
-            <h4><a href="/thread/show/<? echo $row['id'];?>"><? echo $row['title'];?></a></h4>
-            <a href="/thread/show/<? echo $row['id'];?>">[Открыть]</a>
-            <p><? echo $row['body'];?></p>
-            <span class="label">Написал <? echo $row['author'].' - '.$row['timestamp'];?></span>
+      <div class="span1"></div>
+      	<div class="span10 well">
+          <div class="row">
+            <div class="span9"><a href="/thread/show/<? echo $row['id'];?>"><span class="big"><? echo $row['title'];?></span> </a></div>
+            <div class="span1"><span class="badge badge-important" style="float:right;">#<? echo $row['id'] ?></span></div>
+          </div>
+            <p class="postbody"><? echo $row['body'];?></p>
+            <span class="label label-inverse">Написал <? echo $row['author'].' - '.$row['timestamp'];?></span>
           </div>
     </div>
         
