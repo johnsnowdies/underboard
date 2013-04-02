@@ -23,12 +23,5 @@ class Controller_Main extends Controller
         }   else self::action_index();
 
     }
-
-    function action_thread($thread){
-        if(isset($_SESSION['user'])) {
-            echo $thread;
-        }else
-        header('Location: /');
-    }
 }
 ?>

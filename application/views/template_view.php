@@ -11,10 +11,11 @@
         .container{
             margin-top:50px;
         }
+        
     </style>
 </head>
 <body>
-   <div class="container"> <h1>Underboard</h1></div>
+  
     <?php include 'application/views/'.$content_view; ?>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
