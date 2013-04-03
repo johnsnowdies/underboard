@@ -10,8 +10,12 @@ class Controller_Reply extends Controller
     function action_index()
     {	
     	if (isset($_POST['author'])){
-            $this->model->insert_Reply($_POST['title'],$_POST['body'],$_POST['author'],$_POST['parent']);
-            header('Location: /');
+            if ($_POST['title']!="" && $_POST['author']!="" && $_POST['body']!=""){
+                $this->model->insert_Reply($_POST['title'],$_POST['body'],$_POST['author'],$_POST['parent']);
+                header('Location: /');
+            }
+            else
+                header('Location: /404');
         }
     }
 

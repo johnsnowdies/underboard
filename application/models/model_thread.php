@@ -11,6 +11,7 @@ class Model_Thread extends Model
     	$op = $this->DBH->prepare('SELECT * FROM `posts` WHERE `id` = :parent');
     	$op->execute(array('parent' => $thread));
 
+        // Выбираетм все посты
     	$body = $this->DBH->prepare('SELECT * FROM `posts` WHERE `parent` = :parent');
         $body->execute(array('parent' => $thread));
        
