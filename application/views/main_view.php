@@ -19,7 +19,6 @@
 
         <form action="<? echo "http://" . $_SERVER['SERVER_NAME'] . "/reply"; ?>" class="form-horizontal" method="post">
             <div class="modal-body">
-
                 <input type="hidden" name="parent" value="0">
                 <div class="control-group">
                     <label class="control-label" for="inputAuthor">Имя</label>
@@ -45,7 +44,6 @@
                                   placeholder=""></textarea>
                     </div>
                 </div>
-
             </div>
             <div class="modal-footer">
                 <button class="btn" data-dismiss="modal" aria-hidden="true">Отменить</button>
@@ -54,14 +52,12 @@
         </form>
     </div>
 
-
-
     <?php
     if ($data != null) {
         while ($row = $data->fetch()) {
             ?>
-            <div class="row">
-                <div class="span1"><span class="counter label label-inverse"><? echo $row['count'];?></span></div>
+            <div class="row post">
+                <div class="span1"><span class="counter label label-inverse" style="float: right;"><? echo $row['count'];?></span></div>
                 <div class="span10 well">
                     <div class="row">
                         <div class="span9"><a href="/thread/show/<? echo $row['id']; ?>"><span
@@ -69,16 +65,18 @@
                         <div class="span1"><span class="badge badge-important"
                                                  style="float:right;">#<? echo $row['id'] ?></span></div>
                     </div>
-                    <p class="postbody"><? echo $row['body'];?></p>
+                    <p class="postbody"><? echo nl2br($row['body']);?></p>
+                    <span class="label label-info" style="color:#333;"><i class="icon-star" ></i> в избранное</span>
                     <span
-                        class="label label-inverse">Написал <? echo $row['author'] . ' - ' . $row['timestamp'];?></span>
+                    
+                        class="label label-inverse" style="height: 15px;">Написал <? echo $row['author'] . ' - ' . $row['timestamp'];?></span>
+                    
                 </div>
             </div>
 
         <?
         }
     }
-
     ?>
 
 </div>

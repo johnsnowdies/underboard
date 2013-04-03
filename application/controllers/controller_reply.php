@@ -12,7 +12,10 @@ class Controller_Reply extends Controller
     	if (isset($_POST['author'])){
             if ($_POST['title']!="" && $_POST['author']!="" && $_POST['body']!=""){
                 $this->model->insert_Reply($_POST['title'],$_POST['body'],$_POST['author'],$_POST['parent']);
-                header('Location: /');
+                if ($_POST['parent'] == 0) header('Location: /');
+                    else
+                        header('Location: /thread/show/'.$_POST['parent']);
+
             }
             else
                 header('Location: /404');

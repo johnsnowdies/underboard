@@ -8,7 +8,7 @@ class Model_Auth extends Model
 
 		$result = $sth->fetch(PDO::FETCH_ASSOC);
 		if ($result['login'] == $email) $result = true; else $result = false;
-
+			if ($result['membership'] = 'admin') $_SESSION['mode'] = 'admin'; 
         return $result;
     }
 }

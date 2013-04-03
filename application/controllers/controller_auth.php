@@ -12,6 +12,7 @@ class Controller_Auth extends Controller
     	if(isset($_POST['email']) && isset($_POST['password']))
     	if ($this->model->check_user($_POST['email'],$_POST['password'])){  
     		$_SESSION['user'] = 'yes';
+            
 	        header("Location: /");
         }
         else

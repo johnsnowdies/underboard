@@ -6,10 +6,11 @@
     <title>Underboard</title>
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
-    <link href="/css/bootstrapSwitch.css" rel="stylesheet">
+    <script src="/js/jquery-1.9.1.min.js"></script>
     <style type="text/css">
         .container{
             margin-top:50px;
+
         }
 
         body{
@@ -22,7 +23,7 @@
             padding: 0px 5px 5px 20px;
             border: none;
             background: none;
-            border-bottom: 1px dashed #3a3a3a;
+            
         }
 
         .label-inverse{
@@ -34,7 +35,7 @@
         }
 
        p.postbody{
-        text-align: justify;
+        
         font-family: helvetica;
         
        }
@@ -42,6 +43,14 @@
        span.big{
         font-size: 2em;
         font-family: cambria;
+       }
+
+       span.half-big{
+        font-size: 1.5em;
+        text-transform: lowercase;
+        font-style: italic;
+        font-family: cambria;
+
        }
 
 
@@ -75,6 +84,10 @@
             margin-left: -400px;
         }
 
+        .post{
+            border-bottom: 1px dashed #3a3a3a;
+            margin-bottom: 40px;
+        }
 
         
     </style>
@@ -83,7 +96,7 @@
   
     <?php include 'application/views/'.$content_view; ?>
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    
 	<script src="http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/bootstrapSwitch.js"></script>

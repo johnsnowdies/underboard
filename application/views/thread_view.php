@@ -23,15 +23,16 @@ body{
               </div>
           </div>
 
-    <div class="row">
+    <div class="row post">
      
         <div class="span11 well">
           <div class="row">
             <div class="span10"><a href="/thread/show/<? echo $row['id'];?>"><span class="big"><? echo $row['title'];?></span> </a></div>
             <div class="span1"><span class="badge badge-important" style="float:right;">#<? echo $row['id'] ?></span></div>
           </div>
-            <p class="postbody"><? echo $row['body'];?></p>
-            <span class="label label-inverse">Написал <? echo $row['author'].' - '.$row['timestamp'];?></span>
+            <p class="postbody"><? echo nl2br($row['body']);?></p>
+              <span class="label label-info" style="color:#333;"><i class="icon-star" ></i> в избранное</span>
+            <span class="label label-inverse" style="height: 15px;">Написал <? echo $row['author'].' - '.$row['timestamp'];?></span>
           </div>
     </div>
         
@@ -43,14 +44,14 @@ body{
     while ($row = $data['postbody']->fetch()) { ?>
 
 
-    <div class="row">
+    <div class="row post">
       <div class="span1"></div>
-        <div class="span10 well">
+        <div class="span10 well ">
           <div class="row">
-            <div class="span8"><a href="#<? echo $row['id'];?>"><span class="big"><? echo $row['title'];?></span> </a></div>
-            <div class="span2"><span class="badge badge-important" style="float:right;">#<? echo $row['id'] ?></span></div>
+            <div class="span8"><a href="#<? echo $row['id'];?>"><span class="half-big"><? echo $row['title'];?></span> </a></div>
+            <div class="span2"><span class="number badge badge-important" style="float:right; cursor:pointer;">#<? echo $row['id'] ?></span></div>
           </div>
-            <p class="postbody"><? echo $row['body'];?></p>
+            <p class="postbody"><? echo nl2br($row['body']);?></p>
             <span class="label label-inverse">Написал <? echo $row['author'].' - '.$row['timestamp'];?></span>
       </div>
     </div>
@@ -88,6 +89,10 @@ body{
   </div>
 </form>
 
-
+<script type="text/javascript">
+  jQuery(".number").click(function(){
+    $('#inputBody').val($('#inputBody').val() + $(this).html()+" ");
+  });
+</script>
 
 </div>
