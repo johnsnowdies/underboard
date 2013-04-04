@@ -2,21 +2,37 @@
 <html lang="ru">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-
+    <link rel="shortcut icon" href="/favicon.ico" />
     <title>Underboard</title>
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
     <script src="/js/jquery-1.9.1.min.js"></script>
     <script type="text/javascript">
         var uid = '<?echo $_SESSION['uid'];?>';
-        JSONTest = function() {
+        getDislikeState = function(post) {
+            var result="false";
+           
+            $.ajax({
+                url: "http://underboard/ajax/",
+                type: "POST",
+                data: { uid: uid, method: "getState", post: post},
+                dataType: "json",
+                success: function( html, status ){
+                    result =  html.results;
+                },
+                error: function(data, status){ alert(status); }
+            });
+            return result;
+        };
+
+        dislikePost = function(post) {
 
             var resultDiv = $("#resultDivContainer");
 
             $.ajax({
                 url: "http://underboard/ajax/",
                 type: "POST",
-                data: { uid: uid, method: "minus"},
+                data: { uid: uid, method: "minus", post: post},
                 dataType: "json",
                 success: function( html, status ){
                     alert( html.results);

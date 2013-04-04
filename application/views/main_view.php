@@ -71,8 +71,15 @@
                     </div>
                     <p class="postbody"><? echo nl2br($row['body']);?></p>
                     <span class="label label-info" style="color:#333;"><i class="icon-star"></i> в избранное</span>
+                    
+                    <span id ="dislike" class="label label-important">
+                        <!--<a href="javascript:dislikePost(<?echo $row['id']?>);"> -->
+                                              <i class="icon-thumbs-down"></i>&nbsp;+1
+                        <!--</a>-->
+                    </span>
+                                          
                     <span class="label label-inverse" style="height: 15px;">Написал <? echo $row['author'] . ' - ' . $row['timestamp'];?></span>
-                    <span class="label label-success"><i class="icon-thumbs-down"></i>&nbsp;0</span>
+
                 </div>
             </div>
         <?
