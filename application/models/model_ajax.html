@@ -1,0 +1,14 @@
+<?php
+class Model_Ajax extends Model
+{
+    function get_data(){
+       
+    }
+
+    function dislike_state($uid,$post){
+    	$sth = $this->DBH->query('SELECT * FROM posts WHERE parent = 0 ORDER BY `last_update` DESC');
+        return $sth;
+    }
+}
+
+?>
