@@ -20,5 +20,3 @@ class Model_Thread extends Model
         return $result;
     }
 }
-
-?>

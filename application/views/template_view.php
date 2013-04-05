@@ -7,40 +7,85 @@
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
     <script src="/js/jquery-1.9.1.min.js"></script>
+    
+    <?php 
+    /* 
     <script type="text/javascript">
-        var uid = '<?echo $_SESSION['uid'];?>';
-        getDislikeState = function(post) {
-            var result="false";
-           
+   
+        var uid = '<?echo $_SESSION['user'];?>';
+
+        getState = function(post){
+        	
+			
+			$.ajax({
+				url: "http://underboard/service/",
+				type: "POST",
+				   
+	            data: { user: uid, method: "get", thread: post},
+	            dataType: "json",
+	            success: function( html, status ){
+	            	window.ubstate = html.results;
+	            },
+	            error: function(data, status){ this.result = status; }	
+			});
+
+			
+			return window.ubstate;
+        	
+        };
+        
+        setDislike = function(post) {
+        	window.ubstate = "";
+        	
+       		alert(uid +' '+post);	
             $.ajax({
-                url: "http://underboard/ajax/",
+                
+                url: "http://underboard/service/",
                 type: "POST",
-                data: { uid: uid, method: "getState", post: post},
+                data: { user: uid, method: "set", thread: post},
                 dataType: "json",
                 success: function( html, status ){
-                    result =  html.results;
+                	window.ubstate = html.results;
                 },
                 error: function(data, status){ alert(status); }
             });
-            return result;
+            
+            return window.ubstate;
         };
 
-        dislikePost = function(post) {
-
-            var resultDiv = $("#resultDivContainer");
+        revertDislike = function(post) {
+        	window.ubstate = "";
 
             $.ajax({
-                url: "http://underboard/ajax/",
+                url: "http://underboard/service/",
                 type: "POST",
-                data: { uid: uid, method: "minus", post: post},
+                data: { user: uid, method: "revert", thread: post},
                 dataType: "json",
                 success: function( html, status ){
-                    alert( html.results);
+                	window.ubstate = html.results;
                 },
                 error: function(data, status){ alert(status); }
             });
+            return window.ubstate;
         };
-    </script>
+
+        ratePost = function(post,obj){
+        	getState(post);
+ 			var m = getState(post);
+ 			alert (m);
+ 			if (m == "yes") {
+ 	 			revertDislike(post);
+ 	 			$(obj).attr("class","label label-inverse");
+ 			}
+ 			
+ 			if (m == "no"){
+ 	 			 setDislike(post);
+ 	 			$(obj).attr("class","label label-important");
+ 	 		}
+ 			
+        };
+    </script>*/
+    ?>
 
     <style type="text/css">
         .container {

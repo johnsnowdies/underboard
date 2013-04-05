@@ -21,5 +21,3 @@ class Controller_Thread extends Controller
             header('Location:/');
     }
 }
-
-?>

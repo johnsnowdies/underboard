@@ -19,7 +19,7 @@
                     <li><a href="/"><i class="icon-home icon-white"></i>&nbsp;Лобби</a></li>
                     <li class="active"><a href="/thread/show/<? echo $row['id']; ?>"><span
                                 class="label label-important">Текущий тред: #<? echo $row['id'] ?></span></a></li>
-                    <li><a href="/auth/logout"><i class="icon-star icon-white"></i>&nbsp;Избранное</a></li>
+                    <!-- <li><a href="/auth/logout"><i class="icon-star icon-white"></i>&nbsp;Избранное</a></li> -->
                     <li><a href="/auth/logout"><i class="icon-off icon-white"></i>&nbsp;Выход</a></li>
                 </ul>
             </div>

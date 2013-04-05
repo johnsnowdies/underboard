@@ -6,5 +6,3 @@ class Model_Profile extends Model
         return $sth;
     }
 }
-
-?>

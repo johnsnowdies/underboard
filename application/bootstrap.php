@@ -6,4 +6,3 @@ require_once 'core/controller.php';
 require_once 'core/route.php';
 session_start();
 Route::start(); // запускаем маршрутизатор
-?>

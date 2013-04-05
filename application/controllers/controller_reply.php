@@ -22,5 +22,3 @@ class Controller_Reply extends Controller
     }
 
 }
-
-?>

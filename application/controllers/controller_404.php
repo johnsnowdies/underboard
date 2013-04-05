@@ -6,5 +6,3 @@ class Controller_404 extends Controller
         $this->view->generate('404_view.php', 'template_view.php');
     }
 }
-
-?>

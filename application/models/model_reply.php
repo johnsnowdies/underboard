@@ -10,5 +10,3 @@ class Model_Reply extends Model
         $sth->execute(array('last_update' => date("Y-m-d H:i:s"), 'parent' => $parent));
     }
 }
-
-?>

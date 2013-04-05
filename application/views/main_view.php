@@ -1,3 +1,11 @@
+<?php 
+$buf = $data;
+$data = $buf['data'];
+$content = $buf['posts'];
+ 
+$current = $buf['current'];
+?>
+
 <div class="container">
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="navbar-inner">
@@ -5,12 +13,12 @@
             <ul class="nav">
                 <li class="active"><a href="/"><i class="icon-home icon-white"></i>&nbsp;Лобби</a></li>
                 <li><a href="#myModal" role="button" data-toggle="modal"><i class="icon-plus icon-white"></i>&nbsp;Новая тема</a></li>
-                <li><a href="/auth/logout"><i class="icon-star icon-white"></i>&nbsp;Избранное</a></li>
+                <!-- <li><a href="/auth/logout"><i class="icon-star icon-white"></i>&nbsp;Избранное</a></li> -->
                 <li><a href="/auth/logout"><i class="icon-off icon-white"></i>&nbsp;Выход</a></li>
             </ul>
         </div>
     </div>
-
+    
     <div class="modal hide fade in large" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" area-hidden="true">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -70,20 +78,32 @@
                         </div>
                     </div>
                     <p class="postbody"><? echo nl2br($row['body']);?></p>
+                    <?php /*
                     <span class="label label-info" style="color:#333;"><i class="icon-star"></i> в избранное</span>
-                    
-                    <span id ="dislike" class="label label-important">
-                        <!--<a href="javascript:dislikePost(<?echo $row['id']?>);"> -->
-                                              <i class="icon-thumbs-down"></i>&nbsp;+1
-                        <!--</a>-->
+                    	<span id ="dislike_<?echo $row['id']?>" class="label label-inverse" style="cursor: pointer">
+                        <i class="icon-thumbs-down"></i>&nbsp; <? echo $row['dislikes']?>
                     </span>
-                                          
+                    <script type="text/javascript">
+						$("#dislike_<?echo $row['id']?>").click(function(){
+								ratePost(<?echo $row['id']?>,this);
+							});
+                    </script>
+                          */?>                
                     <span class="label label-inverse" style="height: 15px;">Написал <? echo $row['author'] . ' - ' . $row['timestamp'];?></span>
 
                 </div>
             </div>
         <?
         }
-    }
-    ?>
+    }?>
+    
+    <div class="pagination">
+    <ul>
+		<?if ($current > 0){?> <li><a href="<?php $_SERVER['SERVER_NAME'];?>/main/page/<? echo $current-1?>">Назад</a></li><? }?>
+    	<? for ($i=0;$i<$content;$i++ ){ ?>
+    		<li><a href="<?php $_SERVER['SERVER_NAME'];?>/main/page/<? echo $i?>"><? echo $i+1?></a></li>
+    	<? }?>
+    	<?if ($current < ($content-1)){?> <li><a href="<?php $_SERVER['SERVER_NAME'];?>/main/page/<? echo $current+1?>">Вперед</a></li><? }?>
+    </ul>
+    </div>
 </div>

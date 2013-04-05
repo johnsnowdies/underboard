@@ -10,14 +10,16 @@ class Controller_Main extends Controller
 
     function action_index()
     {
-        if (isset($_SESSION['user'])){
-            if ($_SESSION['uid'] == $this->model->check_uid($_SESSION['user'])) {
-                $data = $this->model->get_data();
-                $this->view->generate('main_view.php', 'template_view.php', $data);
-            }
-        }else
-            $this->view->generate('login_view.php', 'template_view.php');
-
+    	if (isset($_SESSION['user'])){
+    		if ($_SESSION['uid'] == $this->model->check_uid($_SESSION['user'])) {
+    			$posts = $this->model->get_total_threads();
+    			
+    			$content = $this->model->get_threads(0);
+    			$data = array('data'=>$content, 'posts'=> $posts, 'current' => 0);
+    			$this->view->generate('main_view.php', 'template_view.php', $data);
+    		}
+    	}else
+    		$this->view->generate('login_view.php', 'template_view.php');
     }
 
     function action_bad()
@@ -25,8 +27,18 @@ class Controller_Main extends Controller
         if (!isset($_SESSION['user'])) {
 
         } else self::action_index();
-
+    }
+    
+    function action_page($page){
+    	if (isset($_SESSION['user'])){
+    		if ($_SESSION['uid'] == $this->model->check_uid($_SESSION['user'])) {
+    			$posts = $this->model->get_total_threads();
+    			 
+    			$content = $this->model->get_threads($page);
+    			$data = array('data'=>$content, 'posts'=> $posts, 'current' => $page);
+    			$this->view->generate('main_view.php', 'template_view.php', $data);
+    		}
+    	}else
+    		$this->view->generate('login_view.php', 'template_view.php');
     }
 }
-
-?>

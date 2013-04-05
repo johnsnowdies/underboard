@@ -16,5 +16,3 @@ class Controller_Profile extends Controller
     }
 
 }
-
-?>
