@@ -8,8 +8,7 @@
 
 
     <?php
-    while ($row = $data['opener']->fetch()) {
-        ?>
+    while ($row = $data['opener']->fetch()) { ?>
 
 
         <div class="navbar navbar-inverse navbar-fixed-top">
@@ -25,6 +24,7 @@
             </div>
         </div>
 
+        <a style="position: absolute;margin-top:-45px;" name="<?=  $row['id']; ?>"></a>
         <div class="row post">
 
             <div class="span11 well">
@@ -51,20 +51,24 @@
     while ($row = $data['postbody']->fetch()) {
         ?>
 
-
+        <a style="position: absolute;margin-top:-45px;" name="<?=  $row['id']; ?>"></a>
         <div class="row post">
+
             <div class="span1"></div>
             <div class="span10 well ">
                 <div class="row">
-                    <div class="span8"><a href="#<? echo $row['id']; ?>"><span
-                                class="half-big"><? echo $row['title'];?></span> </a></div>
+                  
+                    <div class="span8"><a href="#<?=  $row['id']; ?>"><span
+                                class="half-big"><?=  $row['title'];?></span> </a></div>
                     <div class="span2"><span class="number badge badge-important"
-                                             style="float:right; cursor:pointer;">#<? echo $row['id'] ?></span></div>
+                                             style="float:right; cursor:pointer;">#<?= $row['id'] ?></span></div>
                 </div>
                   <? if(!empty($row['image'])){ ?>
                     <img class="picrelated" src="data:image;base64,<?= base64_encode($row['image']); ?> " />
                     <? } ?>
-                <p class="postbody"><? echo nl2br($row['body']);?></p>
+                
+                <p class="postbody"><?=  preg_replace('/\#(\w+)/', '<a class="navlink" href="'.$_SERVER['REQUEST_URI'].'#$1">#$1</a>', preg_replace('/^>.*/m', '<span class="quote">$0</span>', nl2br($row['body'])));?></p>
+
                 <span class="label label-inverse">Написал <? echo $row['author'] . ' - ' . $row['timestamp'];?></span>
             </div>
         </div>

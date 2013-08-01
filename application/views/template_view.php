@@ -168,6 +168,14 @@
             margin-top:10px;
         }
 
+        .navlink{
+            color:#a6e22e;
+        }
+
+        .quote{
+            color:#a6e22e;   
+        }
+
     </style>
 </head>
 <body>
