@@ -25,7 +25,7 @@ $current = $buf['current'];
             <h3 id="myModalLabel">Новая тема</h3>
         </div>
 
-        <form action="<? echo "http://" . $_SERVER['SERVER_NAME'] . "/reply"; ?>" class="form-horizontal" method="post">
+        <form action="<? echo "http://" . $_SERVER['SERVER_NAME'] . "/reply"; ?>" class="form-horizontal" method="post" enctype="multipart/form-data">
             <div class="modal-body">
                 <input type="hidden" name="parent" value="0">
 
@@ -49,6 +49,15 @@ $current = $buf['current'];
                         <textarea id="inputBody" class="input-xxlarge" style="height:120px;" name="body" placeholder=""></textarea>
                     </div>
                 </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="inputImage">Картинка</label>
+                    <div class="controls">
+                        <input type="hidden" name="MAX_FILE_SIZE" value="2000000">
+                        <input name="inputImage" type="file" id="inputImage"> 
+                    </div>
+                </div>
+
             </div>
 
             <div class="modal-footer">
@@ -77,6 +86,9 @@ $current = $buf['current'];
                             <span class="badge badge-important" style="float:right;">#<? echo $row['id'] ?></span>
                         </div>
                     </div>
+                    <? if(!empty($row['image'])){ ?>
+                    <img class="picrelated" src="data:image;base64,<?= base64_encode($row['image']); ?> " />
+                    <? } ?>
                     <p class="postbody"><? echo nl2br($row['body']);?></p>
                     <?php /*
                     <span class="label label-info" style="color:#333;"><i class="icon-star"></i> в избранное</span>

@@ -158,6 +158,16 @@
             border-bottom: 1px dashed #3a3a3a;
             margin-bottom: 20px;
         }
+
+        .picrelated{
+            margin: 10px 0 10px 0;
+            max-width: 400px;
+        }
+
+        .postbody{
+            margin-top:10px;
+        }
+
     </style>
 </head>
 <body>

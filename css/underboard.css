@@ -59,6 +59,10 @@
         -moz-transition: all .2s ease-in-out;
         transition: all .2s ease-in-out;
     }
+    
+    .row{
+    height:25px;
+    }
 
     .jumbotron a:hover {
         color: #fff;

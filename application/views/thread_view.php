@@ -34,8 +34,10 @@
                     <div class="span1"><span class="badge badge-important"
                                              style="float:right;">#<? echo $row['id'] ?></span></div>
                 </div>
+                  <? if(!empty($row['image'])){ ?>
+                    <img class="picrelated" src="data:image;base64,<?= base64_encode($row['image']); ?> " />
+                    <? } ?>
                 <p class="postbody"><? echo nl2br($row['body']);?></p>
-                <span class="label label-info" style="color:#333;"><i class="icon-star"></i> в избранное</span>
                 <span class="label label-inverse"
                       style="height: 15px;">Написал <? echo $row['author'] . ' - ' . $row['timestamp'];?></span>
             </div>
@@ -59,6 +61,9 @@
                     <div class="span2"><span class="number badge badge-important"
                                              style="float:right; cursor:pointer;">#<? echo $row['id'] ?></span></div>
                 </div>
+                  <? if(!empty($row['image'])){ ?>
+                    <img class="picrelated" src="data:image;base64,<?= base64_encode($row['image']); ?> " />
+                    <? } ?>
                 <p class="postbody"><? echo nl2br($row['body']);?></p>
                 <span class="label label-inverse">Написал <? echo $row['author'] . ' - ' . $row['timestamp'];?></span>
             </div>
@@ -68,7 +73,7 @@
     ?>
 
     <form action="<? echo "http://" . $_SERVER['SERVER_NAME'] . "/reply"; ?>" class="form-horizontal well"
-          method="post">
+          method="post" enctype="multipart/form-data">
         <input type="hidden" name="parent" value="<? echo $id; ?>">
 
         <div class="control-group">
@@ -93,6 +98,14 @@
                 <textarea id="inputBody" class="input-xxlarge" style="height:120px;" name="body"
                           placeholder="Body"></textarea>
             </div>
+        </div>
+
+        <div class="control-group">
+                    <label class="control-label" for="inputImage">Картинка</label>
+                    <div class="controls">
+                        <input type="hidden" name="MAX_FILE_SIZE" value="2000000">
+                        <input name="inputImage" type="file" id="inputImage"> 
+                    </div>
         </div>
 
         <div class="control-group">
