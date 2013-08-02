@@ -1,8 +1,8 @@
 @CHARSET "UTF-8";
 
-    body {
+body {
         background-color: #222222;
-        background-image: url('img/low_contrast_linen.png');
+         background-image: url('/img/low_contrast_linen.png');
     }
 
     .gh-ico {
@@ -58,10 +58,6 @@
         -webkit-transition: all .2s ease-in-out;
         -moz-transition: all .2s ease-in-out;
         transition: all .2s ease-in-out;
-    }
-    
-    .row{
-    height:25px;
     }
 
     .jumbotron a:hover {
@@ -157,8 +153,8 @@
         padding: 0 10px;
         color: rgba(255, 255, 255, .25);
     }
-
-  .container {
+    
+.container {
             margin-top: 50px;
         }
 
@@ -227,4 +223,21 @@
         .post {
             border-bottom: 1px dashed #3a3a3a;
             margin-bottom: 20px;
+        }
+
+        .picrelated{
+            margin: 10px 0 10px 0;
+            max-width: 400px;
+        }
+
+        .postbody{
+            margin-top:10px;
+        }
+
+        .navlink{
+            color:#a6e22e;
+        }
+
+        .quote{
+            color:#a6e22e;   
         }

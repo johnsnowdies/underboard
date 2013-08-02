@@ -13,7 +13,7 @@ class Model_Thread extends Model
         $op->execute(array('parent' => $thread));
 
         // Выбираетм все посты
-        $body = $this->DBH->prepare('SELECT * FROM `posts` WHERE `parent` = :parent');
+        $body = $this->DBH->prepare('SELECT * FROM `posts` WHERE `parent` = :parent ORDER BY `id`');
         $body->execute(array('parent' => $thread));
 
         $result = array('opener' => $op, 'postbody' => $body);

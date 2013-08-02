@@ -1,11 +1,10 @@
 <?php 
-$buf = $data;
-$data = $buf['data'];
-$content = $buf['posts'];
- 
-$current = $buf['current'];
+    $buf     = $data;
+    $data    = $buf['data'];
+    $content = $buf['posts'];
+    $current = $buf['current'];
 ?>
-
+<!-- Main view page -->
 <div class="container">
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="navbar-inner">
@@ -13,7 +12,6 @@ $current = $buf['current'];
             <ul class="nav">
                 <li class="active"><a href="/"><i class="icon-home icon-white"></i>&nbsp;Лобби</a></li>
                 <li><a href="#myModal" role="button" data-toggle="modal"><i class="icon-plus icon-white"></i>&nbsp;Новая тема</a></li>
-                <!-- <li><a href="/auth/logout"><i class="icon-star icon-white"></i>&nbsp;Избранное</a></li> -->
                 <li><a href="/auth/logout"><i class="icon-off icon-white"></i>&nbsp;Выход</a></li>
             </ul>
         </div>
@@ -25,7 +23,7 @@ $current = $buf['current'];
             <h3 id="myModalLabel">Новая тема</h3>
         </div>
 
-        <form action="<? echo "http://" . $_SERVER['SERVER_NAME'] . "/reply"; ?>" class="form-horizontal" method="post" enctype="multipart/form-data">
+        <form action="<?= "http://" . $_SERVER['SERVER_NAME'] . "/reply"; ?>" class="form-horizontal" method="post" enctype="multipart/form-data">
             <div class="modal-body">
                 <input type="hidden" name="parent" value="0">
 
@@ -57,7 +55,6 @@ $current = $buf['current'];
                         <input name="inputImage" type="file" id="inputImage"> 
                     </div>
                 </div>
-
             </div>
 
             <div class="modal-footer">
@@ -69,40 +66,27 @@ $current = $buf['current'];
 
     <?php
     if ($data != null) {
-        while ($row = $data->fetch()) {
-            ?>
+        while ($row = $data->fetch()) {?>
             <div class="row post">
                 <div class="span1">
-                    <span class="counter label label-inverse" style="float: right;"><? echo $row['count'];?></span>
+                    <span class="counter label label-inverse" style="float: right;"><?= $row['count'];?></span>
                 </div>
                 <div class="span10 well">
                     <div class="row">
                         <div class="span9">
-                                <a href="/thread/show/<? echo $row['id']; ?>">
-                                    <span class="big"><? echo $row['title'];?></span>
+                                <a href="/thread/show/<?= $row['id']; ?>">
+                                    <span class="big"><?= $row['title'];?></span>
                                 </a>
                         </div>
                         <div class="span1">
-                            <span class="badge badge-important" style="float:right;">#<? echo $row['id'] ?></span>
+                            <span class="badge badge-important" style="float:right;">#<?= $row['id'] ?></span>
                         </div>
                     </div>
                     <? if(!empty($row['image'])){ ?>
-                    <img class="picrelated" src="data:image;base64,<?= base64_encode($row['image']); ?> " />
+                        <img class="picrelated" src="data:image;base64,<?= base64_encode($row['image']); ?> " />
                     <? } ?>
-                    <p class="postbody"><? echo nl2br($row['body']);?></p>
-                    <?php /*
-                    <span class="label label-info" style="color:#333;"><i class="icon-star"></i> в избранное</span>
-                    	<span id ="dislike_<?echo $row['id']?>" class="label label-inverse" style="cursor: pointer">
-                        <i class="icon-thumbs-down"></i>&nbsp; <? echo $row['dislikes']?>
-                    </span>
-                    <script type="text/javascript">
-						$("#dislike_<?echo $row['id']?>").click(function(){
-								ratePost(<?echo $row['id']?>,this);
-							});
-                    </script>
-                          */?>                
-                    <span class="label label-inverse" style="height: 15px;">Написал <? echo $row['author'] . ' - ' . $row['timestamp'];?></span>
-
+                    <p class="postbody"><?= nl2br($row['body']);?></p>
+                    <span class="label label-inverse" style="height: 15px;">Написал <?= $row['author'] . ' - ' . $row['timestamp'];?></span>
                 </div>
             </div>
         <?
@@ -111,11 +95,11 @@ $current = $buf['current'];
     
     <div class="pagination">
     <ul>
-		<?if ($current > 0){?> <li><a href="<?php $_SERVER['SERVER_NAME'];?>/main/page/<? echo $current-1?>">Назад</a></li><? }?>
+		<?if ($current > 0){?> <li><a href="<?php $_SERVER['SERVER_NAME'];?>/main/page/<?= $current-1?>">Назад</a></li><? }?>
     	<? for ($i=0;$i<$content;$i++ ){ ?>
-    		<li><a href="<?php $_SERVER['SERVER_NAME'];?>/main/page/<? echo $i?>"><? echo $i+1?></a></li>
+    		<li><a href="<?php $_SERVER['SERVER_NAME'];?>/main/page/<?= $i?>"><?= $i+1?></a></li>
     	<? }?>
-    	<?if ($current < ($content-1)){?> <li><a href="<?php $_SERVER['SERVER_NAME'];?>/main/page/<? echo $current+1?>">Вперед</a></li><? }?>
+    	<?if ($current < ($content-1)){?> <li><a href="<?php $_SERVER['SERVER_NAME'];?>/main/page/<?= $current+1?>">Вперед</a></li><? }?>
     </ul>
     </div>
 </div>
