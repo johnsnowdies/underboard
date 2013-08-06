@@ -3,42 +3,76 @@ class Controller_Reply extends Controller
 {
     function __construct()
     {
-        $this->model = new Model_Reply();
-        $this->view = new View();
+        $this->model   = new Model_Reply();
+        $this->view    = new View();
+        $this->request = new Request();
     }
-
+	
+    function getExtension($str) {
+    	$i = strrpos($str,".");
+    	if (!$i) { return ""; }
+    	$l = strlen($str) - $i;
+    	$ext = substr($str,$i+1,$l);
+    	return $ext;
+    }
+    
     function action_index()
     {
-        if (isset($_POST['author'])) {
-            if ($_POST['author'] != "" && $_POST['body'] != "") {
-                if ($_POST['title'] == "") $title = "комментарий:";
-                    else
-                        $title = $_POST['title'];
-
-                if ($_FILES['inputImage']['size'] > 0){
-                    $fileName = $_FILES['inputImage']['name'];
-                    $tmpName  = $_FILES['inputImage']['tmp_name'];
-                    $fileSize = $_FILES['inputImage']['size'];
-                    $fileType = $_FILES['inputImage']['type'];
-
-                    $fp      = fopen($tmpName, 'r');
-                    $content = fread($fp, filesize($tmpName));
-                    fclose($fp);    
-                }
+    			$error = false;	
+        		if (empty($this->request->post->author) || empty($this->request->post->body)) 
+        			$error = true;
+        	
+        		$title = $this->request->post->title;
+        		
+        		if (empty($this->request->post->title))
+        		{
+        			if($this->request->post->parent) 
+        				$title = "комментарий:";
+        			else
+        				$error = true;
+        		}
+        		
+				
+        		if (!$error){
+                	if ($this->request->files->inputImage->size > 0){
+                		
+                    	$fileName = $this->request->files->inputImage->name;
+                    	$tmpName  = $this->request->files->inputImage->tmp_name;
+                    	$fileSize = $this->request->files->inputImage->size;
+                    	$fileType = $this->request->files->inputImage->type;
+                    	$extension = $this->getExtension($fileName);
+                    	$extension = strtolower($extension);
+                    	
+                    		$fp      = fopen($tmpName, 'r');
+                    		$content = fread($fp, filesize($tmpName));
+                    		fclose($fp);
+                    		
+                    	    $thumb = PhpThumbFactory::create($tmpName);
+                    		$thumb->resize(400);
+                    		
+                    		$tmpThumb = rand(1000000, 3500000).'.jpg';
+                    		$thumb->save($tmpThumb, 'jpg');
+                    		
+                    		$fp      = fopen($tmpThumb, 'r');
+                    		$thumb = fread($fp, filesize($tmpThumb));
+                    		fclose($fp);
+                    		
+                    		unlink($tmpThumb);
+                    	
+                	}
                 
-                if ($_FILES['inputImage']['size'] > 0)
-                    $this->model->insert_Reply($title, $_POST['body'], $_POST['author'], $_POST['parent'], $content);
-                else
-                    $this->model->insert_Reply($title, $_POST['body'], $_POST['author'], $_POST['parent']);
+                	if ($this->request->files->inputImage->size > 0 && !$imgError)
+	                    $this->model->insert_Reply($title, $this->request->post->body, $this->request->post->author, $this->request->post->parent,$thumb,$content );
+    	            else
+        	            $this->model->insert_Reply($title, $this->request->post->body, $this->request->post->author, $this->request->post->parent);
 
+            	    if (!$this->request->post->parent) 
+                		header('Location: /');
+                	else
+                    	header('Location: /thread/show/' . $this->request->post->parent);
 
-                if ($_POST['parent'] == 0) header('Location: /');
-                else
-                    header('Location: /thread/show/' . $_POST['parent']);
-
-            } else
-                header('Location: /404');
-        }
+        		}
+        		else
+        			header('Location: /404');
     }
-
 }
