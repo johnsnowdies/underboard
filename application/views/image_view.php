@@ -2,7 +2,15 @@
 
 foreach($data->fetchAll() as $row){
 ?>
+<div class="image-holder">
+<center>
+	<img class="big-image" src="data:image/<?=$row['mime']?>;base64,<?=base64_encode($row['image_big']) ?>" />
+</center>
+</div>
 
-<img name="compman" src="data:image;base64,<?=base64_encode($row['image_big']) ?>" />
-<a href="data:image/jpeg;base64,<?=base64_encode($row['image_big']) ?>" download="filename.jpg">Схоронить!</a>
+<div class="save-btn">
+	<center>
+		<a class="btn btn-primary" href="data:image/<?=$row['mime']?>;base64,<?=base64_encode($row['image_big']) ?>" download="ub00<?=$id ?>.<?=$row['mime']?>">Сохранить!</a>
+	</center>
+</div>
 <?php }?>

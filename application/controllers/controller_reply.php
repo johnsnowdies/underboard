@@ -58,11 +58,10 @@ class Controller_Reply extends Controller
                     		fclose($fp);
                     		
                     		unlink($tmpThumb);
-                    	
                 	}
                 
                 	if ($this->request->files->inputImage->size > 0 && !$imgError)
-	                    $this->model->insert_Reply($title, $this->request->post->body, $this->request->post->author, $this->request->post->parent,$thumb,$content );
+	                    $this->model->insert_Reply($title, $this->request->post->body, $this->request->post->author, $this->request->post->parent,$thumb,$content,$extension );
     	            else
         	            $this->model->insert_Reply($title, $this->request->post->body, $this->request->post->author, $this->request->post->parent);
 

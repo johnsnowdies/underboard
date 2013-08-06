@@ -3,6 +3,19 @@
     $data    = $buf['data'];
     $content = $buf['posts'];
     $current = $buf['current'];
+
+    function utf8_substr($str,$start)
+    {
+        preg_match_all("/./su", $str, $ar);
+ 
+       if(func_num_args() >= 3) {
+           $end = func_get_arg(2);
+            return join("",array_slice($ar[0],$start,$end));
+       } else {
+        return join("",array_slice($ar[0],$start));
+    }
+    }
+
 ?>
 <!-- Main view page -->
 <div class="container">
@@ -11,15 +24,15 @@
             <a class="brand" href="/">underboard</a>
             <ul class="nav">
                 <li class="active"><a href="/"><i class="icon-home icon-white"></i>&nbsp;Лобби</a></li>
-                <li><a href="#myModal" role="button" data-toggle="modal"><i class="icon-plus icon-white"></i>&nbsp;Новая тема</a></li>
+                <li><a id="newPost" role="button" ><i class="icon-plus icon-white"></i>&nbsp;Новая тема</a></li>
                 <li><a href="/auth/logout"><i class="icon-off icon-white"></i>&nbsp;Выход</a></li>
             </ul>
         </div>
     </div>
     
-    <div class="modal hide fade in large" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" area-hidden="true">
+    <div class="modal hide fade in large" id="postForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" area-hidden="true">
         <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+ 
             <h3 id="myModalLabel">Новая тема</h3>
         </div>
 
@@ -28,7 +41,7 @@
                 <input type="hidden" name="parent" value="0">
 
                 <div class="control-group">
-                    <label class="control-label" for="inputAuthor">Имя</label>
+                    <label class="control-label" for="inputAuthor">Автор</label>
                     <div class="controls">
                         <input type="text" id="inputAuthor" class="input-xxlarge" name="author" value="Anonymous">
                     </div>
@@ -55,13 +68,19 @@
                         <input name="inputImage" type="file" id="inputImage"> 
                     </div>
                 </div>
+                <div class="control-group">
+                    <div class="controls">
+                        <span title="Заполнены не все поля"  id="warning" class="badge badge-important"><b>Ошибка - заполнены не все поля</b></span>
+                    </div>
+                </div>
             </div>
 
             <div class="modal-footer">
-                <button class="btn" data-dismiss="modal" aria-hidden="true">Отменить</button>
-                <button type="submit" class="btn btn-primary">Отправить!</button>
+                <a class="btn" id="postFormCancel" >Отменить</a>
+                <button type="submit" id="sent-button" disabled class="btn btn-primary">Отправить!</button>
             </div>
         </form>
+       
     </div>
 
     <?php
@@ -74,7 +93,7 @@
                 <div class="span10 well">
                     <div class="row">
                         <div class="span9">
-                                <a href="/thread/show/<?= $row['id']; ?>">
+                                <a href="/thread/show/<?= $row['id']; ?>" >
                                     <span class="big"><?= $row['title'];?></span>
                                 </a>
                         </div>
@@ -83,9 +102,18 @@
                         </div>
                     </div>
                     <? if(!empty($row['image'])){ ?>
-                        <img class="picrelated" src="data:image;base64,<?= base64_encode($row['image']); ?> " />
+                        <a href="/image/show/<?= $row['id']; ?>" target="_blank">
+                            <img class="picrelated" src="data:image/jpeg;base64,<?= base64_encode($row['image']); ?> " />
+                        </a>
                     <? } ?>
-                    <p class="postbody"><?= nl2br($row['body']);?></p>
+                    <? if (strlen($row['body']) < 500){?>
+                        <p class="postbody"><?= nl2br($row['body']);?></p>
+                    <? }else { ?>
+                        <p class="postbody post-cut"><?=utf8_substr(nl2br($row['body']),0,500);?>...
+                            <br/><a href="/thread/show/<?= $row['id']; ?>" id="show<?=$row['id']?>">Показать полностью</a>
+                        </p>
+                    <?}?>
+
                     <span class="label label-inverse" style="height: 15px;">Написал <?= $row['author'] . ' - ' . $row['timestamp'];?></span>
                 </div>
             </div>
@@ -93,13 +121,60 @@
         }
     }?>
     
-    <div class="pagination">
+    <div class="pagination-custom">
     <ul>
-		<?if ($current > 0){?> <li><a href="<?php $_SERVER['SERVER_NAME'];?>/main/page/<?= $current-1?>">Назад</a></li><? }?>
+		<?if ($current > 0){?> <li><center><div class="page"><a href="<?php $_SERVER['SERVER_NAME'];?>/main/page/<?= $current-1?>"><i class="icon-chevron-left"></i></a></div></center></li><? }?>
     	<? for ($i=0;$i<$content;$i++ ){ ?>
-    		<li><a href="<?php $_SERVER['SERVER_NAME'];?>/main/page/<?= $i?>"><?= $i+1?></a></li>
+    		<li><center><div class="page <? if ($i == $current) echo 'current'?>"><a href="<?php $_SERVER['SERVER_NAME'];?>/main/page/<?= $i?>"><?= $i+1?></a></div></center></li>
     	<? }?>
-    	<?if ($current < ($content-1)){?> <li><a href="<?php $_SERVER['SERVER_NAME'];?>/main/page/<?= $current+1?>">Вперед</a></li><? }?>
+    	<?if ($current < ($content-1)){?> <li><center><div class="page"><a href="<?php $_SERVER['SERVER_NAME'];?>/main/page/<?= $current+1?>"><i class="icon-chevron-right"></i></a></div></center></li><? }?>
     </ul>
     </div>
+    <br/><br/>
 </div>
+
+ <script type="text/javascript">
+        $('#newPost').click(function(){
+           $('#postForm').slideDown();
+        });
+
+        $('#postFormCancel').click(function(){
+            $('#postForm').slideUp();
+        });
+
+        $('#inputTitle').keyup(function(){
+           if ($('#inputAuthor').val()!="" && $('#inputBody').val()!="" && $('#inputTitle').val()!=""){
+                $('#warning').fadeOut();
+                $('#sent-button').removeAttr('disabled');
+            }
+            else{
+                $('#warning').fadeIn();
+                $('#sent-button').attr('disabled','');
+            }
+
+        });
+
+        $('#inputBody').keyup(function(){
+           if ($('#inputAuthor').val()!="" && $('#inputBody').val()!="" && $('#inputTitle').val()!=""){
+                $('#warning').fadeOut();
+                $('#sent-button').removeAttr('disabled');
+            }
+            else{
+                $('#warning').fadeIn();
+                $('#sent-button').attr('disabled','');
+            }
+
+        });
+
+        $('#inputAuthor').keyup(function(){
+            if ($('#inputAuthor').val()!="" && $('#inputBody').val()!="" && $('#inputTitle').val()!=""){
+                $('#warning').fadeOut();
+                $('#sent-button').removeAttr('disabled');
+            }
+            else{
+                $('#warning').fadeIn();
+                $('#sent-button').attr('disabled','');
+            }
+
+        });
+    </script>

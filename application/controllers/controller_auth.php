@@ -3,16 +3,17 @@ class Controller_Auth extends Controller
 {
     function __construct()
     {
-        $this->model = new Model_Auth();
-        $this->view = new View();
+        $this->model    = new Model_Auth();
+        $this->view     = new View();
+        $this->request  = new Request();
     }
 
     function action_index()
     {
-        if (isset($_POST['email']) && isset($_POST['password']))
-            $uid =$this->model->check_user($_POST['email'], $_POST['password']);
+        if (!empty($this->request->post->email) && !empty($this->request->post->password))
+            $uid =$this->model->check_user($this->request->post->email, $this->request->post->password);
             if ( $uid != false) {
-                $_SESSION['user'] = $_POST['email'];
+                $_SESSION['user'] = $this->request->post->email;
                 $_SESSION['uid']  = $uid;
                 header("Location: /");
             } else {

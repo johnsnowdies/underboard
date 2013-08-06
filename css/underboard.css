@@ -1,9 +1,13 @@
 @CHARSET "UTF-8";
 
+
+
 body {
         background-color: #222222;
          background-image: url('/img/low_contrast_linen.png');
     }
+
+
 
     .gh-ico {
         float: left;
@@ -226,7 +230,7 @@ body {
         }
 
         .picrelated{
-
+            max-width: 400px;
             margin: 10px 10px 0px 0;
 
           
@@ -242,4 +246,57 @@ body {
 
         .quote{
             color:#a6e22e;   
+        }
+
+        .image-holder{
+            padding: 20px;
+            border-bottom: 1px dashed #3a3a3a;
+        }
+
+        .save-btn{
+            margin-top: 20px;
+        }
+
+        .big-image{
+
+   
+        }
+
+        .pagination-custom ul li{
+          display: inline;
+           
+
+        }
+        .pagination-custom ul li .page{
+
+            display: block;
+            float: left;
+            margin-right: 5px;
+            width: 26px;
+            height: 23px;
+            background-color: #0099ff;
+            border-radius: 16px;
+            padding-top: 3px;
+
+        }
+
+        .pagination-custom ul li .current{
+              width: 24px;
+            height: 22px;
+            padding-top: 1px;
+            border: 2px solid #eee;
+        }
+
+        .pagination-custom ul li .page a{
+           color:#333333; 
+           font-weight: bold;
+
+        }
+
+        #newPost{
+            cursor: pointer;
+        }
+
+        .post-cut{
+            
         }

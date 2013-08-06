@@ -35,7 +35,9 @@
                                              style="float:right;">#<? echo $row['id'] ?></span></div>
                 </div>
                   <? if(!empty($row['image'])){ ?>
-                    <img class="picrelated" src="data:image;base64,<?= base64_encode($row['image']); ?> " />
+                    <a href="/image/show/<?= $row['id']; ?>" target="_blank">
+                        <img class="picrelated" src="data:image/jpeg;base64,<?= base64_encode($row['image']); ?> " />
+                    </a>
                     <? } ?>
                 <p class="postbody"><? echo nl2br($row['body']);?></p>
                 <span class="label label-inverse"
@@ -64,7 +66,9 @@
                                              style="float:right; cursor:pointer;">#<?= $row['id'] ?></span></div>
                 </div>
                   <? if(!empty($row['image'])){ ?>
-                    <img class="picrelated" src="data:image;base64,<?= base64_encode($row['image']); ?> " />
+                    <a href="/image/show/<?= $row['id']; ?>" target="_blank">
+                        <img class="picrelated" src="data:image/jpeg;base64,<?= base64_encode($row['image']); ?> " />
+                    </a>
                     <? } ?>
                 
                 <p class="postbody"><?=  preg_replace('/\#(\w+)/', '<a class="navlink" href="'.$_SERVER['REQUEST_URI'].'#$1">#$1</a>', preg_replace('/^>.*/m', '<span class="quote">$0</span>', nl2br($row['body'])));?></p>
@@ -81,26 +85,26 @@
         <input type="hidden" name="parent" value="<? echo $id; ?>">
 
         <div class="control-group">
-            <label class="control-label" for="inputAuthor">Author</label>
+            <label class="control-label" for="inputAuthor">Автор</label>
 
             <div class="controls">
                 <input type="text" id="inputAuthor" class="input-xxlarge" name="author" value="Anonymous">
             </div>
         </div>
         <div class="control-group">
-            <label class="control-label" for="inputTitle">Title</label>
+            <label class="control-label" for="inputTitle">Заголовок</label>
 
             <div class="controls">
-                <input type="text" id="inputTitle" class="input-xxlarge" name="title" placeholder="title">
+                <input type="text" id="inputTitle" class="input-xxlarge" name="title" placeholder="Заголовок">
             </div>
         </div>
 
         <div class="control-group">
-            <label class="control-label" for="inputBody">Body</label>
+            <label class="control-label" for="inputBody">Сообщение</label>
 
             <div class="controls">
                 <textarea id="inputBody" class="input-xxlarge" style="height:120px;" name="body"
-                          placeholder="Body"></textarea>
+                          placeholder="Текст"></textarea>
             </div>
         </div>
 
@@ -113,9 +117,13 @@
         </div>
 
         <div class="control-group">
+            <div class="control-label">
+                <span title="Заполнены не все поля"  id="warning" class="badge badge-important"><b>Ошибка</b></span>
+            </div>
             <div class="controls">
+                
+                <button type="submit" id="sent-button" disabled class="btn btn-primary">Отправить!</button>
 
-                <button type="submit" class="btn btn-primary">Отправить!</button>
             </div>
         </div>
     </form>
@@ -123,6 +131,31 @@
     <script type="text/javascript">
         jQuery(".number").click(function () {
             $('#inputBody').val($('#inputBody').val() + $(this).html() + " ");
+        });
+
+
+        $('#inputBody').keyup(function(){
+           if ($('#inputAuthor').val()!="" && $('#inputBody').val()!=""){
+                $('#warning').fadeOut();
+                $('#sent-button').removeAttr('disabled');
+            }
+            else{
+                $('#warning').fadeIn();
+                $('#sent-button').attr('disabled','');
+            }
+
+        });
+
+        $('#inputAuthor').keyup(function(){
+            if ($('#inputAuthor').val()!="" && $('#inputBody').val()!=""){
+                $('#warning').fadeOut();
+                $('#sent-button').removeAttr('disabled');
+            }
+            else{
+                $('#warning').fadeIn();
+                $('#sent-button').attr('disabled','');
+            }
+
         });
     </script>
 

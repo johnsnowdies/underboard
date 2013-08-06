@@ -8,14 +8,10 @@
     <link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
     <link href="/css/underboard.css" rel="stylesheet">
     <script src="/js/jquery-1.9.1.min.js"></script>
-
-
 </head>
 <body>
-
 <?php include 'application/views/' . $content_view; ?>
-<script src="http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/bootstrapSwitch.js"></script>
+
+	<script src="/js/bootstrap.min.js"></script>
 </body>
 </html>
