@@ -18,17 +18,25 @@
 
 ?>
 <!-- Main view page -->
-<div class="container">
     <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="navbar-inner">
+        <div class="navbar-inner ">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
             <a class="brand" href="/">underboard</a>
+            <div class="nav-collapse collapse">
             <ul class="nav">
                 <li class="active"><a href="/"><i class="icon-home icon-white"></i>&nbsp;Лобби</a></li>
-                <li><a id="newPost" role="button" ><i class="icon-plus icon-white"></i>&nbsp;Новая тема</a></li>
+                <li class="visible-desktop"><a id="newPost" role="button" ><i class="icon-plus icon-white"></i>&nbsp;Новая тема</a></li>
                 <li><a href="/auth/logout"><i class="icon-off icon-white"></i>&nbsp;Выход</a></li>
             </ul>
+            </div>
         </div>
     </div>
+<div class="container">
+
     
     <div class="modal hide fade in large" id="postForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" area-hidden="true">
         <div class="modal-header">
@@ -87,7 +95,7 @@
     if ($data != null) {
         while ($row = $data->fetch()) {?>
             <div class="row post">
-                <div class="span1">
+                <div class="span1 visible-desktop">
                     <span class="counter label label-inverse" style="float: right;"><?= $row['count'];?></span>
                 </div>
                 <div class="span10 well">
@@ -97,9 +105,10 @@
                                     <span class="big"><?= $row['title'];?></span>
                                 </a>
                         </div>
-                        <div class="span1">
+                        <div class="span1 visible-desktop">
                             <span class="badge badge-important" style="float:right;">#<?= $row['id'] ?></span>
                         </div>
+                        <p class="visible-phone visible-tablet">#<?= $row['id'] ?></p>
                     </div>
                     <? if(!empty($row['image'])){ ?>
                         <a href="/image/show/<?= $row['id']; ?>" target="_blank">

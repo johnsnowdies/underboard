@@ -1,6 +1,11 @@
 <!-- Login page-->
 
-<div class="jumbotron masthead">
+<div class="visible-phone ">
+<h1>Underboard</h1>
+<p> &#946;eta - moblie</p>
+</div>
+
+<div class="jumbotron masthead visible-desktop visible-tablet">
     <h1>Underboard</h1>
     <p> &#946;eta</p>
 </div>

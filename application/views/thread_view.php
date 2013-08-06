@@ -4,16 +4,19 @@
     }
 </style>
 
-<div class="container">
 
 
     <?php
     while ($row = $data['opener']->fetch()) { ?>
-
-
         <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="navbar-inner">
+                <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
                 <a class="brand" href="/">underboard</a>
+                <div class="nav-collapse collapse">
                 <ul class="nav">
                     <li><a href="/"><i class="icon-home icon-white"></i>&nbsp;Лобби</a></li>
                     <li class="active"><a href="/thread/show/<? echo $row['id']; ?>"><span
@@ -21,9 +24,10 @@
                     <!-- <li><a href="/auth/logout"><i class="icon-star icon-white"></i>&nbsp;Избранное</a></li> -->
                     <li><a href="/auth/logout"><i class="icon-off icon-white"></i>&nbsp;Выход</a></li>
                 </ul>
+                </div>
             </div>
         </div>
-
+<div class="container">
         <a style="position: absolute;margin-top:-45px;" name="<?=  $row['id']; ?>"></a>
         <div class="row post">
 
@@ -31,8 +35,9 @@
                 <div class="row">
                     <div class="span10"><a href="/thread/show/<? echo $row['id']; ?>"><span
                                 class="big"><? echo $row['title'];?></span> </a></div>
-                    <div class="span1"><span class="badge badge-important"
+                    <div class="span1 visible-desktop"><span class="badge badge-important"
                                              style="float:right;">#<? echo $row['id'] ?></span></div>
+                    <p class="visible-phone visible-tablet">#<?= $row['id'] ?></p>
                 </div>
                   <? if(!empty($row['image'])){ ?>
                     <a href="/image/show/<?= $row['id']; ?>" target="_blank">
@@ -62,8 +67,9 @@
                   
                     <div class="span8"><a href="#<?=  $row['id']; ?>"><span
                                 class="half-big"><?=  $row['title'];?></span> </a></div>
-                    <div class="span2"><span class="number badge badge-important"
+                    <div class="span2 visible-desktop"><span class="number badge badge-important"
                                              style="float:right; cursor:pointer;">#<?= $row['id'] ?></span></div>
+                    <p class="visible-phone visible-tablet">#<?= $row['id'] ?></p>
                 </div>
                   <? if(!empty($row['image'])){ ?>
                     <a href="/image/show/<?= $row['id']; ?>" target="_blank">
@@ -108,7 +114,7 @@
             </div>
         </div>
 
-        <div class="control-group">
+        <div class="control-group visible-desktop">
                     <label class="control-label" for="inputImage">Картинка</label>
                     <div class="controls">
                         <input type="hidden" name="MAX_FILE_SIZE" value="2000000">
@@ -118,7 +124,7 @@
 
         <div class="control-group">
             <div class="control-label">
-                <span title="Заполнены не все поля"  id="warning" class="badge badge-important"><b>Ошибка</b></span>
+                <span title="Заполнены не все поля"  id="warning" class="badge badge-important hidden-tablet hidden-phone"><b>Ошибка</b></span>
             </div>
             <div class="controls">
                 
