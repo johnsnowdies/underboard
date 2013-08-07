@@ -6,38 +6,45 @@ class Controller_Main extends Controller
         $this->view    = new View();
         $this->request = new Request();
     }
+    
+    function make_pagination($pages,$current){
+    	if ($current > 0) 
+    		$pagination[] = array('class'=>'page', 'link' => 'http://'.$this->request->server->SERVER_NAME.'/main/page/'.($current-1), 'value' => '<i class="icon-chevron-left"></i>');
+    	
+    	for ($i = 0; $i < $pages; $i++ ){
+    		if ($i == $current)
+    			$pagination[] = array('class'=>'page current','link' => 'http://'.$this->request->server->SERVER_NAME.'/main/page/'.$i, 'value' => $i);
+    		else
+    			$pagination[] = array('class'=>'page','link' => 'http://'.$this->request->server->SERVER_NAME.'/main/page/'.$i, 'value' => $i);
+    	}
+    	if ($current < ($pages-1))	
+    		$pagination[] = array('class'=>'page', 'link' => 'http://'.$this->request->server->SERVER_NAME.'/main/page/'.($current+1), 'value' => '<i class="icon-chevron-right"></i>');
+    	
+    	return $pagination;
+    }
 
     function action_index(){
-    	if (!empty($this->request->session->user)){
-    		if ($this->request->session->uid == $this->model->check_uid($this->request->session->user)){
-    			
-    			$posts 	 = $this->model->get_total_threads();
-    			$content = $this->model->get_threads(0);
-    			$data 	 = array('data'=>$content, 'posts'=> $posts, 'current' => 0);
-    			
-    			$this->view->generate('main_view.php', 'template_view.php', $data);
-    		}
+    	if (Auth::isAuth()){
+    			$pages 	 = $this->model->get_pages_count();
+    			$data = $this->model->get_threads(0);
+				$extars = $this->make_pagination($pages, 0);
+				$post_reply = 'http://' . $this->request->server->SERVER_NAME . '/reply';
+    			$this->view->generate('main_view.php', 'template_view.php', $data, $post_reply, $extars );
+    		
     	}else
     		$this->view->generate('login_view.php', 'template_view.php');
     }
 
-    function action_bad(){
-        if (!isset($this->request->session->user)){
-			
-        } else self::action_index();
-    }
 
     function action_page($page){
-    	if (!empty($this->request->session->user)){
-    		if ($this->request->session->uid == $this->model->check_uid($this->request->session->user)){
+    	if (Auth::isAuth()){
+    			$pages 	 = $this->model->get_pages_count();
+    			$data = $this->model->get_threads($page);
     			
-    			$posts 	 = $this->model->get_total_threads();
-    			$content = $this->model->get_threads($page);
-    			$data 	 = array('data'=>$content, 'posts'=> $posts, 'current' => $page);
-    			
-    			$this->view->generate('main_view.php', 'template_view.php', $data);
-    		}
+    			$extars = $this->make_pagination($pages, $page);
+    			$post_reply = 'http://' . $this->request->server->SERVER_NAME . '/reply';
+    			$this->view->generate('main_view.php', 'template_view.php', $data, $post_reply, $extars );
     	}else
-    		$this->view->generate('login_view.php', 'template_view.php');
+    		Route::ErrorPage404();
     }
 }

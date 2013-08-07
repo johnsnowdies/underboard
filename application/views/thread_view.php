@@ -1,105 +1,71 @@
-<style type="text/css">
-    body {
-        background-color: #363A3A;
-    }
-</style>
+<!-- Thread view -->
+<div class="navbar navbar-inverse navbar-fixed-top">
+	<div class="navbar-inner">
+		<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		</button>
+		<a class="brand" href="/">underboard</a>
+		<div class="nav-collapse collapse">
+			<ul class="nav">
+				<li><a href="/"><i class="icon-home icon-white"></i>&nbsp;Лобби</a></li>
+            	<li class="active">
+					<a href="/thread/show/<?=$data[0]->id?>">
+                		<span class="label label-important">Текущий тред: #<?=$data[0]->id?></span>
+					</a>
+				</li>
+	            <li><a href="/auth/logout"><i class="icon-off icon-white"></i>&nbsp;Выход</a></li>
+            </ul>
+		</div>
+	</div>
+</div>
 
-
-
-    <?php
-    while ($row = $data['opener']->fetch()) { ?>
-        <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="navbar-inner">
-                <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="brand" href="/">underboard</a>
-                <div class="nav-collapse collapse">
-                <ul class="nav">
-                    <li><a href="/"><i class="icon-home icon-white"></i>&nbsp;Лобби</a></li>
-                    <li class="active"><a href="/thread/show/<? echo $row['id']; ?>"><span
-                                class="label label-important">Текущий тред: #<? echo $row['id'] ?></span></a></li>
-                    <!-- <li><a href="/auth/logout"><i class="icon-star icon-white"></i>&nbsp;Избранное</a></li> -->
-                    <li><a href="/auth/logout"><i class="icon-off icon-white"></i>&nbsp;Выход</a></li>
-                </ul>
-                </div>
-            </div>
-        </div>
 <div class="container">
-        <a style="position: absolute;margin-top:-45px;" name="<?=  $row['id']; ?>"></a>
-        <div class="row post">
-
-            <div class="span11 well">
+<?foreach ($data as $reply) {?>
+	<!-- Reply -->
+	<a style="position: absolute;margin-top:-45px;" name="<?=$reply->id?>"></a>
+	<div class="row post">
+		<?if (!isset($reply->parent)){?>
+		<div class="span1"></div>
+			<div class="span10 well ">
+		<?php }else{?>
+            <div class="span11 well "> <?}?>
                 <div class="row">
-                    <div class="span10"><a href="/thread/show/<? echo $row['id']; ?>"><span
-                                class="big"><? echo $row['title'];?></span> </a></div>
-                    <div class="span1 visible-desktop"><span class="badge badge-important"
-                                             style="float:right;">#<? echo $row['id'] ?></span></div>
-                    <p class="visible-phone visible-tablet">#<?= $row['id'] ?></p>
+                    <div class="span8">
+                    	<a href="#<?=$reply->id?>">
+                    		<span class="half-big"><?=$reply->title?></span> 
+                    	</a>
+                    </div>
+                    <?if (isset($reply->parent)){?><div class="span1"></div><?php }?>
+                    <div class="span2 visible-desktop">
+                    	<span class="number badge badge-important" style="float:right; cursor:pointer;">#<?=$reply->id?></span>
+                    </div>
+	                    <p class="visible-phone visible-tablet">#<?=$reply->id?></p>
                 </div>
-                  <? if(!empty($row['image'])){ ?>
-                    <a href="/image/show/<?= $row['id']; ?>" target="_blank">
-                        <img class="picrelated" src="data:image/jpeg;base64,<?= base64_encode($row['image']); ?> " />
-                    </a>
-                    <? } ?>
-                <p class="postbody"><? echo nl2br($row['body']);?></p>
-                <span class="label label-inverse"
-                      style="height: 15px;">Написал <? echo $row['author'] . ' - ' . $row['timestamp'];?></span>
-            </div>
-        </div>
-
-    <?
-    }
-    ?>
-
-    <?php
-    while ($row = $data['postbody']->fetch()) {
-        ?>
-
-        <a style="position: absolute;margin-top:-45px;" name="<?=  $row['id']; ?>"></a>
-        <div class="row post">
-
-            <div class="span1"></div>
-            <div class="span10 well ">
-                <div class="row">
-                  
-                    <div class="span8"><a href="#<?=  $row['id']; ?>"><span
-                                class="half-big"><?=  $row['title'];?></span> </a></div>
-                    <div class="span2 visible-desktop"><span class="number badge badge-important"
-                                             style="float:right; cursor:pointer;">#<?= $row['id'] ?></span></div>
-                    <p class="visible-phone visible-tablet">#<?= $row['id'] ?></p>
-                </div>
-                  <? if(!empty($row['image'])){ ?>
-                    <a href="/image/show/<?= $row['id']; ?>" target="_blank">
-                        <img class="picrelated" src="data:image/jpeg;base64,<?= base64_encode($row['image']); ?> " />
-                    </a>
-                    <? } ?>
+                <? if(!empty($reply->mime)){ ?>
+                	<a href="/image/show/<?=$reply->id?>" target="_blank">
+                        <img class="picrelated" src="/image/thumb/<?=$reply->id ?>" /> 
+                    </a><? }?>
                 
-                <p class="postbody"><?=  preg_replace('/\#(\w+)/', '<a class="navlink" href="'.$_SERVER['REQUEST_URI'].'#$1">#$1</a>', preg_replace('/^>.*/m', '<span class="quote">$0</span>', nl2br($row['body'])));?></p>
+                <p class="postbody"><?=$reply->body?></p>
+                <span class="label label-inverse">Написал <?= $reply->author. ' - ' . $reply->timestamp?></span>
+			</div>
+	</div>
+	<? } ?>
 
-                <span class="label label-inverse">Написал <? echo $row['author'] . ' - ' . $row['timestamp'];?></span>
-            </div>
-        </div>
-    <?
-    }
-    ?>
-
-    <form action="<? echo "http://" . $_SERVER['SERVER_NAME'] . "/reply"; ?>" class="form-horizontal well"
-          method="post" enctype="multipart/form-data">
-        <input type="hidden" name="parent" value="<? echo $id; ?>">
+    <form action="<?=$extars->postReply?>" class="form-horizontal well" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="parent" value="<?= $id; ?>">
 
         <div class="control-group">
             <label class="control-label" for="inputAuthor">Автор</label>
-
             <div class="controls">
                 <input type="text" id="inputAuthor" class="input-xxlarge" name="author" value="Anonymous">
             </div>
         </div>
+
         <div class="control-group">
             <label class="control-label" for="inputTitle">Заголовок</label>
-
             <div class="controls">
                 <input type="text" id="inputTitle" class="input-xxlarge" name="title" placeholder="Заголовок">
             </div>
@@ -107,19 +73,17 @@
 
         <div class="control-group">
             <label class="control-label" for="inputBody">Сообщение</label>
-
             <div class="controls">
-                <textarea id="inputBody" class="input-xxlarge" style="height:120px;" name="body"
-                          placeholder="Текст"></textarea>
+                <textarea id="inputBody" class="input-xxlarge" style="height:120px;" name="body" placeholder="Текст"></textarea>
             </div>
         </div>
 
-        <div class="control-group visible-desktop">
-                    <label class="control-label" for="inputImage">Картинка</label>
-                    <div class="controls">
-                        <input type="hidden" name="MAX_FILE_SIZE" value="2000000">
-                        <input name="inputImage" type="file" id="inputImage"> 
-                    </div>
+        <div class="control-group">
+            <label class="control-label" for="inputImage">Картинка</label>
+            <div class="controls">
+            	<input type="hidden" name="MAX_FILE_SIZE" value="2097152">
+                <input name="inputImage" type="file" id="inputImage"> 
+			</div>
         </div>
 
         <div class="control-group">
@@ -127,42 +91,30 @@
                 <span title="Заполнены не все поля"  id="warning" class="badge badge-important hidden-tablet hidden-phone"><b>Ошибка</b></span>
             </div>
             <div class="controls">
-                
                 <button type="submit" id="sent-button" disabled class="btn btn-primary">Отправить!</button>
-
             </div>
         </div>
     </form>
 
     <script type="text/javascript">
-        jQuery(".number").click(function () {
+        function validate(){
+        	if ($('#inputAuthor').val() && $('#inputBody').val()){
+				 $('#warning').fadeOut();
+	             $('#sent-button').removeAttr('disabled');
+			}
+			else{
+               $('#warning').fadeIn();
+               $('#sent-button').attr('disabled','');
+           }
+        }
+
+        $(".number").click(function(){
             $('#inputBody').val($('#inputBody').val() + $(this).html() + " ");
+            validate();
         });
-
-
-        $('#inputBody').keyup(function(){
-           if ($('#inputAuthor').val()!="" && $('#inputBody').val()!=""){
-                $('#warning').fadeOut();
-                $('#sent-button').removeAttr('disabled');
-            }
-            else{
-                $('#warning').fadeIn();
-                $('#sent-button').attr('disabled','');
-            }
-
-        });
-
-        $('#inputAuthor').keyup(function(){
-            if ($('#inputAuthor').val()!="" && $('#inputBody').val()!=""){
-                $('#warning').fadeOut();
-                $('#sent-button').removeAttr('disabled');
-            }
-            else{
-                $('#warning').fadeIn();
-                $('#sent-button').attr('disabled','');
-            }
-
-        });
+        
+		$('document').ready(function(){validate();});
+        $('#inputBody').keyup(function(){validate();});
+        $('#inputAuthor').keyup(function(){validate();});
     </script>
-
 </div>

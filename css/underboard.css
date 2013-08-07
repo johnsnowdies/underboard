@@ -255,6 +255,7 @@ body {
 
         .save-btn{
             margin-top: 20px;
+            margin-bottom:20px;
         }
 
         .big-image{
@@ -297,6 +298,28 @@ body {
             cursor: pointer;
         }
 
-        .post-cut{
+        .notfound span{
+        font-size:0.298em;
+        }
+        
+        .notfound{
+        	
+        	font-size:10em;
+     
+            font-weight: bold;
+            color: #000;
+            text-shadow: 0 1px 0 rgba(255, 255, 255, .1), 0 0 30px rgba(255, 255, 255, .125);
+            -webkit-transition: all .2s linear;
+            -moz-transition: all .2s linear;
+            transition: all .2s linear;
+            
             
         }
+
+        .notfound:hover {
+            text-decoration: none;
+            color: #0099ff;
+            text-shadow: 0 1px 0 rgba(0, 153, 255, .1), 0 0 30px rgba(0, 153, 255, .4);
+        }
+        
+    

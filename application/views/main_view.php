@@ -1,22 +1,3 @@
-<?php 
-    $buf     = $data;
-    $data    = $buf['data'];
-    $content = $buf['posts'];
-    $current = $buf['current'];
-
-    function utf8_substr($str,$start)
-    {
-        preg_match_all("/./su", $str, $ar);
- 
-       if(func_num_args() >= 3) {
-           $end = func_get_arg(2);
-            return join("",array_slice($ar[0],$start,$end));
-       } else {
-        return join("",array_slice($ar[0],$start));
-    }
-    }
-
-?>
 <!-- Main view page -->
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="navbar-inner ">
@@ -29,22 +10,19 @@
             <div class="nav-collapse collapse">
             <ul class="nav">
                 <li class="active"><a href="/"><i class="icon-home icon-white"></i>&nbsp;Лобби</a></li>
-                <li class="visible-desktop"><a id="newPost" role="button" ><i class="icon-plus icon-white"></i>&nbsp;Новая тема</a></li>
+                <li class="visible-desktop"><a id="newPost" ><i class="icon-plus icon-white"></i>&nbsp;Новая тема</a></li>
                 <li><a href="/auth/logout"><i class="icon-off icon-white"></i>&nbsp;Выход</a></li>
             </ul>
             </div>
         </div>
     </div>
 <div class="container">
-
-    
     <div class="modal hide fade in large" id="postForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" area-hidden="true">
         <div class="modal-header">
- 
             <h3 id="myModalLabel">Новая тема</h3>
         </div>
 
-        <form action="<?= "http://" . $_SERVER['SERVER_NAME'] . "/reply"; ?>" class="form-horizontal" method="post" enctype="multipart/form-data">
+        <form action="<?=$id?>" class="form-horizontal" method="post" enctype="multipart/form-data">
             <div class="modal-body">
                 <input type="hidden" name="parent" value="0">
 
@@ -91,68 +69,60 @@
        
     </div>
 
-    <?php
-    if ($data != null) {
-        while ($row = $data->fetch()) {?>
+    <? foreach($data as $post){?>
             <div class="row post">
                 <div class="span1 visible-desktop">
-                    <span class="counter label label-inverse" style="float: right;"><?= $row['count'];?></span>
+                    <span class="counter label label-inverse" style="float: right;"><?=$post->count?></span>
                 </div>
                 <div class="span10 well">
                     <div class="row">
                         <div class="span9">
-                                <a href="/thread/show/<?= $row['id']; ?>" >
-                                    <span class="big"><?= $row['title'];?></span>
+                                <a href="/thread/show/<?=$post->id?>" >
+                                    <span class="big"><?=$post->title?></span>
                                 </a>
                         </div>
                         <div class="span1 visible-desktop">
-                            <span class="badge badge-important" style="float:right;">#<?= $row['id'] ?></span>
+                            <span class="badge badge-important" style="float:right;">#<?=$post->id?></span>
                         </div>
-                        <p class="visible-phone visible-tablet">#<?= $row['id'] ?></p>
+                        <p class="visible-phone visible-tablet">#<?=$post->id?></p>
                     </div>
-                    <? if(!empty($row['image'])){ ?>
-                        <a href="/image/show/<?= $row['id']; ?>" target="_blank">
-                            <img class="picrelated" src="data:image/jpeg;base64,<?= base64_encode($row['image']); ?> " />
+                    
+                    <? if(!empty($post->mime)){ ?>
+                        <a href="/image/show/<?= $post->id?>" target="_blank">
+                            <img class="picrelated" src="/image/thumb/<?=$post->id?> " />
                         </a>
                     <? } ?>
-                    <? if (strlen($row['body']) < 500){?>
-                        <p class="postbody"><?= nl2br($row['body']);?></p>
-                    <? }else { ?>
-                        <p class="postbody post-cut"><?=utf8_substr(nl2br($row['body']),0,500);?>...
-                            <br/><a href="/thread/show/<?= $row['id']; ?>" id="show<?=$row['id']?>">Показать полностью</a>
-                        </p>
-                    <?}?>
+                    
+                        <p class="postbody"><?=$post->body ?></p>
 
-                    <span class="label label-inverse" style="height: 15px;">Написал <?= $row['author'] . ' - ' . $row['timestamp'];?></span>
+                    <span class="label label-inverse" style="height: 15px;">Написал <?= $post->author?> - <?= $post->timestamp?></span>
                 </div>
             </div>
-        <?
-        }
-    }?>
+    <? } ?>
     
     <div class="pagination-custom">
     <ul>
-		<?if ($current > 0){?> <li><center><div class="page"><a href="<?php $_SERVER['SERVER_NAME'];?>/main/page/<?= $current-1?>"><i class="icon-chevron-left"></i></a></div></center></li><? }?>
-    	<? for ($i=0;$i<$content;$i++ ){ ?>
-    		<li><center><div class="page <? if ($i == $current) echo 'current'?>"><a href="<?php $_SERVER['SERVER_NAME'];?>/main/page/<?= $i?>"><?= $i+1?></a></div></center></li>
-    	<? }?>
-    	<?if ($current < ($content-1)){?> <li><center><div class="page"><a href="<?php $_SERVER['SERVER_NAME'];?>/main/page/<?= $current+1?>"><i class="icon-chevron-right"></i></a></div></center></li><? }?>
+		
+		 	<? foreach ($extars as $page){?>
+			<li><center>
+				<div class="<?= $page['class']?>">
+					<a href="<?= $page['link']?>"><?= $page['value']?></a>
+				</div>
+				</center>
+			</li>
+			<?}?>
+		
     </ul>
     </div>
     <br/><br/>
 </div>
 
  <script type="text/javascript">
-        $('#newPost').click(function(){
-           $('#postForm').slideDown();
-        });
+        $('#newPost').click(function(){$('#postForm').slideDown();});
+        $('#postFormCancel').click(function(){$('#postForm').slideUp();});
 
-        $('#postFormCancel').click(function(){
-            $('#postForm').slideUp();
-        });
-
-        $('#inputTitle').keyup(function(){
-           if ($('#inputAuthor').val()!="" && $('#inputBody').val()!="" && $('#inputTitle').val()!=""){
+        function validate(){
+        	if ($('#inputAuthor').val()!="" && $('#inputBody').val()!="" && $('#inputTitle').val()!=""){
                 $('#warning').fadeOut();
                 $('#sent-button').removeAttr('disabled');
             }
@@ -160,30 +130,10 @@
                 $('#warning').fadeIn();
                 $('#sent-button').attr('disabled','');
             }
+        }
 
-        });
+        $('#inputTitle').keyup(function(){validate();});
+        $('#inputBody').keyup(function(){validate();});
+        $('#inputAuthor').keyup(function(){validate();});
 
-        $('#inputBody').keyup(function(){
-           if ($('#inputAuthor').val()!="" && $('#inputBody').val()!="" && $('#inputTitle').val()!=""){
-                $('#warning').fadeOut();
-                $('#sent-button').removeAttr('disabled');
-            }
-            else{
-                $('#warning').fadeIn();
-                $('#sent-button').attr('disabled','');
-            }
-
-        });
-
-        $('#inputAuthor').keyup(function(){
-            if ($('#inputAuthor').val()!="" && $('#inputBody').val()!="" && $('#inputTitle').val()!=""){
-                $('#warning').fadeOut();
-                $('#sent-button').removeAttr('disabled');
-            }
-            else{
-                $('#warning').fadeIn();
-                $('#sent-button').attr('disabled','');
-            }
-
-        });
-    </script>
+</script>

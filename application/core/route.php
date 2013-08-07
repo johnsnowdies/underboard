@@ -6,8 +6,9 @@ class Route
         // контроллер и действие по умолчанию
         $controller_name = 'Main';
         $action_name = 'index';
-
-        $routes = explode('/', $_SERVER['REQUEST_URI']);
+		$request = new Request();
+		
+        $routes = explode('/',$request->server->REQUEST_URI);
 
         // получаем имя контроллера
         if (!empty($routes[1])) {
@@ -38,12 +39,7 @@ class Route
         if (file_exists($controller_path)) {
             include "application/controllers/" . $controller_file;
         } else {
-            /*
-            правильно было бы кинуть здесь исключение,
-            но для упрощения сразу сделаем редирект на страницу 404
-            */
-
-            header('Location: /404');
+             self::ErrorPage404();
         }
 
         // создаем контроллер
@@ -52,28 +48,23 @@ class Route
 
         if (method_exists($controller, $action)) {
             // вызываем действие контроллера
-
             // передаем все нужные параметры
             if (isset($routes[3]))
                 $controller->$action($routes[3]);
             else
                 $controller->$action(null);
         } else {
-            // здесь также разумнее было бы кинуть исключение
-            Route::ErrorPage404();
+            self::ErrorPage404();
         }
     }
 
-    function ErrorPage404()
+    static function ErrorPage404()
     {
-        $host = 'http://' . $_SERVER['HTTP_HOST'] . '/';
+    	$request = new Request();
+        $host = 'http://'.$request->server->HTTP_HOST.'/';
         header('HTTP/1.1 404 Not Found');
         header("Status: 404 Not Found");
         header('Location:' . $host . '404');
     }
 
-    function ErrorAccess()
-    {
-
-    }
 }

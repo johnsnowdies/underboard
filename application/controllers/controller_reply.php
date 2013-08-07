@@ -31,11 +31,9 @@ class Controller_Reply extends Controller
         			else
         				$error = true;
         		}
-        		
 				
         		if (!$error){
                 	if ($this->request->files->inputImage->size > 0){
-                		
                     	$fileName = $this->request->files->inputImage->name;
                     	$tmpName  = $this->request->files->inputImage->tmp_name;
                     	$fileSize = $this->request->files->inputImage->size;
@@ -43,21 +41,21 @@ class Controller_Reply extends Controller
                     	$extension = $this->getExtension($fileName);
                     	$extension = strtolower($extension);
                     	
-                    		$fp      = fopen($tmpName, 'r');
-                    		$content = fread($fp, filesize($tmpName));
-                    		fclose($fp);
+                   		$fp      = fopen($tmpName, 'r');
+                   		$content = fread($fp, filesize($tmpName));
+                   		fclose($fp);
                     		
-                    	    $thumb = PhpThumbFactory::create($tmpName);
-                    		$thumb->resize(400);
+                   	    $thumb = PhpThumbFactory::create($tmpName);
+                   		$thumb->resize(400);
                     		
-                    		$tmpThumb = rand(1000000, 3500000).'.jpg';
-                    		$thumb->save($tmpThumb, 'jpg');
+                   		$tmpThumb = rand(1000000, 3500000).'.jpg';
+                   		$thumb->save($tmpThumb, 'jpg');
                     		
-                    		$fp      = fopen($tmpThumb, 'r');
-                    		$thumb = fread($fp, filesize($tmpThumb));
-                    		fclose($fp);
+                   		$fp      = fopen($tmpThumb, 'r');
+                   		$thumb = fread($fp, filesize($tmpThumb));
+                   		fclose($fp);
                     		
-                    		unlink($tmpThumb);
+                   		unlink($tmpThumb);
                 	}
                 
                 	if ($this->request->files->inputImage->size > 0 && !$imgError)
