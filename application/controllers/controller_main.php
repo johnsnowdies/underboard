@@ -8,17 +8,19 @@ class Controller_Main extends Controller
     }
     
     function make_pagination($pages,$current){
-    	if ($current > 0) 
-    		$pagination[] = array('class'=>'page', 'link' => 'http://'.$this->request->server->SERVER_NAME.'/main/page/'.($current-1), 'value' => '<i class="icon-chevron-left"></i>');
+    	$pagelink = 'http://'.$this->request->server->SERVER_NAME.'/main/page/';
+		
+		if ($current > 0) 
+    		$pagination[] = array('class'=>'page', 'link' => $pagelink.($current-1), 'value' => '<i class="icon-chevron-left"></i>');
     	
-    	for ($i = 0; $i < $pages; $i++ ){
+    	for ($i = 0; $i < $pages; $i++ )
     		if ($i == $current)
-    			$pagination[] = array('class'=>'page current','link' => 'http://'.$this->request->server->SERVER_NAME.'/main/page/'.$i, 'value' => $i);
+    			$pagination[] = array('class'=>'page current','link' => $pagelink.$i, 'value' => $i);
     		else
-    			$pagination[] = array('class'=>'page','link' => 'http://'.$this->request->server->SERVER_NAME.'/main/page/'.$i, 'value' => $i);
-    	}
+    			$pagination[] = array('class'=>'page','link' => $pagelink.$i, 'value' => $i);
+    	
     	if ($current < ($pages-1))	
-    		$pagination[] = array('class'=>'page', 'link' => 'http://'.$this->request->server->SERVER_NAME.'/main/page/'.($current+1), 'value' => '<i class="icon-chevron-right"></i>');
+    		$pagination[] = array('class'=>'page', 'link' => $pagelink.($current+1), 'value' => '<i class="icon-chevron-right"></i>');
     	
     	return $pagination;
     }
@@ -30,7 +32,6 @@ class Controller_Main extends Controller
 				$extars = $this->make_pagination($pages, 0);
 				$post_reply = 'http://' . $this->request->server->SERVER_NAME . '/reply';
     			$this->view->generate('main_view.php', 'template_view.php', $data, $post_reply, $extars );
-    		
     	}else
     		$this->view->generate('login_view.php', 'template_view.php');
     }
@@ -40,7 +41,6 @@ class Controller_Main extends Controller
     	if (Auth::isAuth()){
     			$pages 	 = $this->model->get_pages_count();
     			$data = $this->model->get_threads($page);
-    			
     			$extars = $this->make_pagination($pages, $page);
     			$post_reply = 'http://' . $this->request->server->SERVER_NAME . '/reply';
     			$this->view->generate('main_view.php', 'template_view.php', $data, $post_reply, $extars );

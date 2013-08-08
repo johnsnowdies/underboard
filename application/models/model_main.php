@@ -1,8 +1,7 @@
 <?php
-class Model_Main extends Model
-{
-	public function utf8_substr($str,$start)
-	{
+class Model_Main extends Model{
+	
+	public function utf8_substr($str,$start){
 		preg_match_all("/./su", $str, $ar);
 	
 		if(func_num_args() >= 3) {
@@ -11,6 +10,16 @@ class Model_Main extends Model
 		} else {
 			return join("",array_slice($ar[0],$start));
 		}
+	}
+	
+	function make_clickable($text){
+		$ret = ' ' . $text;
+		$ret = preg_replace("#(^|[\n ])([\w]+?://[^ \"\n\r\t<]*)#is", "\\1<a href=\"\\2\" target=\"_blank\">\\2</a>", $ret);
+		$ret = preg_replace("#(^|[\n ])((www|ftp)\.[^ \"\t\n\r<]*)#is", "\\1<a href=\"http://\\2\" target=\"_blank\">\\2</a>", $ret);
+		$ret = preg_replace("#(^|[\n ])([a-z0-9&\-_.]+?)@([\w\-]+\.([\w\-\.]+\.)*[\w]+)#i", "\\1<a href=\"mailto:\\2@\\3\">\\2@\\3</a>", $ret);
+		$ret = substr($ret, 1);
+	
+		return $ret;
 	}
     
     public function get_threads($page){
@@ -31,8 +40,18 @@ class Model_Main extends Model
     			if($innerKey == 'body'){
     				// Перенос строки
     				$body = nl2br($innerValue);
+
+    				$body = $this->make_clickable($body);
+    					
     				// Цитаты
     				$body = preg_replace('/^>.*/m', '<span class="quote">$0</span>', $body);
+    					
+    				// Разметка
+    				$body = preg_replace('/\[b\](.*?)\[\/b\]/', '<b>$1</b>',$body);
+    				$body = preg_replace('/\[i\](.*?)\[\/i\]/', '<i>$1</i>',$body);
+    				$body = preg_replace('/\[irony\](.*?)\[\/irony\]/', '<span class="irony">$1</span>',$body);
+    				$body = preg_replace('/\[spoiler\](.*?)\[\/spoiler\]/', '<span class="spoiler">$1</span>',$body);
+    				
     				
     				if (strlen($body) > 500){
     					$body = $this->utf8_substr($body,0,500);

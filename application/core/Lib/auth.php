@@ -10,7 +10,17 @@ class Auth{
 				$auth = true; 
 			}
 		}
-				
 		return $auth;
 	}
+	
+	static function setAuth($email, $uid){
+		$_SESSION['user'] = $email;
+		$_SESSION['uid'] = $uid;
+	}
+	
+	static function unsetAuth(){
+		unset($_SESSION['user']);
+		unset($_SESSION['uid']);
+	}
+	
 }

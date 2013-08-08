@@ -8,7 +8,12 @@ class Controller_Thread extends Controller
     }
 
     function action_index(){
-		  
+		  if (Auth::isAuth()){
+
+		  	$extars = 'http://' . $this->request->server->SERVER_NAME . '/reply';
+		  	$this->view->generate('new_thread_view.php','template_view.php',$extars);
+		  }else
+		  	Route::ErrorPage404();
     }
 
     function action_show($id){

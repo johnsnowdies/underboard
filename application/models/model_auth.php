@@ -1,8 +1,6 @@
 <?php
-class Model_Auth extends Model
-{
-    public function check_user($email, $password)
-    {
+class Model_Auth extends Model{
+    public function check_user($email, $password){
         $sth = $this->DBH->prepare('SELECT `login` FROM `users` WHERE `password` = :password');
         $sth->execute(array('password' => md5($password)));
 
@@ -13,7 +11,5 @@ class Model_Auth extends Model
 
         return $result;
     }
-
-
 }
 

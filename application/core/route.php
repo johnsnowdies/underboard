@@ -1,8 +1,6 @@
 <?php
-class Route
-{
-    static function start()
-    {
+class Route{
+    static function start(){
         // контроллер и действие по умолчанию
         $controller_name = 'Main';
         $action_name = 'index';
@@ -58,13 +56,21 @@ class Route
         }
     }
 
-    static function ErrorPage404()
-    {
+    static function ErrorPage404(){
     	$request = new Request();
         $host = 'http://'.$request->server->HTTP_HOST.'/';
-        header('HTTP/1.1 404 Not Found');
-        header("Status: 404 Not Found");
+        /* Тут правильно сделать: 
+         * header('HTTP/1.1 404 Not Found');
+         * header("Status: 404 Not Found");
+         * Но это приводит к ошибкам в IIS7 
+        */ 
         header('Location:' . $host . '404');
+    }
+    
+    static function IndexPage(){
+    	$request = new Request();
+    	$host = 'http://'.$request->server->HTTP_HOST.'/';
+    	header('Location:' . $host);
     }
 
 }

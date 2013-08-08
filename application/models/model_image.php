@@ -1,13 +1,8 @@
 <?php
-class Model_Image extends Model
-{
-    public function get_data()
-    {
+class Model_Image extends Model{
+    public function get_data(){}
 
-    }
-
-    public function get_thumb($id)
-    {
+    public function get_thumb($id){
         $image = $this->DBH->prepare('SELECT `image`,`mime` FROM `posts` WHERE `id` = :id');
         $image->execute(array('id' => $id));
         $image = $image->fetchAll(PDO::FETCH_ASSOC);
@@ -20,8 +15,7 @@ class Model_Image extends Model
         return $result;
     }
     
-    public function get_image($id)
-    {
+    public function get_image($id){
     	$image = $this->DBH->prepare('SELECT `image_big` AS `image`,`mime` FROM `posts` WHERE `id` = :id');
     	$image->execute(array('id' => $id));
     	$image = $image->fetchAll(PDO::FETCH_ASSOC);
