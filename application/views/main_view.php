@@ -1,5 +1,5 @@
 <!-- Main page -->
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar navbar-fixed-top">
         <div class="navbar-inner ">
           <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
             <span class="icon-bar"></span>
@@ -9,10 +9,10 @@
             <a class="brand" href="/">underboard</a>
             <div class="nav-collapse collapse">
             <ul class="nav">
-                <li class="active"><a href="/"><i class="icon-home icon-white"></i>&nbsp;Лобби</a></li>
-                <li class="visible-desktop"><a style="cursor: pointer;" data-toggle="modal" data-target="#postForm"><i class="icon-plus icon-white"></i>&nbsp;Новая тема</a></li>
-                <li class="visible-phone visible-tablet"><a href="/thread"><i class="icon-plus icon-white"></i>&nbsp;Новая тема</a></li>
-                <li><a href="/auth/logout"><i class="icon-off icon-white"></i>&nbsp;Выход</a></li>
+                <li class="active"><a href="/"><i class="icon-home"></i>&nbsp;Лобби</a></li>
+                <li class="visible-desktop"><a style="cursor: pointer;" data-toggle="modal" data-target="#postForm"><i class="icon-plus "></i>&nbsp;Новая тема</a></li>
+                <li class="visible-phone visible-tablet"><a href="/thread"><i class="icon-plus "></i>&nbsp;Новая тема</a></li>
+                <li><a href="/auth/logout"><i class="icon-off "></i>&nbsp;Выход</a></li>
             </ul>
             </div>
         </div>

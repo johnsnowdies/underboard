@@ -1,17 +1,32 @@
 <!-- Login page-->
+
 <div class="jumbotron masthead visible-desktop visible-tablet">
     <h1>Underboard</h1>
-    <p> &#946;eta</p>
+   <br>
+     <div style="text-align: left;
+width: 430px;
+color:#444;
+height: 72px;
+font-style: italic;" class="login">
+            Кого здесь только нет - наркоман, графоман, депрессующий, обезумевшие патриот и русофоб, еврей, девственники и безотцовщины! Здесь все мои друзья!<br>
+            <span style="float:right;color:#444;">Anonymous</span>
+    </div>
 </div>
 
 <div class="container">
     
     <div class="phone-logo visible-phone ">
 	    <h1>Underboard</h1>
-		<center><p>&#946;eta - moblie</p></center>
-	</div>
+		<!--<center><p>&#946;eta - moblie</p></center>-->
+        <div style="text-align: left;font-style:italic;font-size:12px;color:#222; ">
+            Кого здесь только нет - наркоман, графоман, депрессующий, обезумевшие патриот и русофоб, еврей, девственники и безотцовщины! Здесь все мои друзья!<br>
+         <span style="float:right;color:#222;">Anonymous</span>
+         
+	   </div>
+       <br><br>
+    </div>
 	<?= $data?>
-        <div class="login">
+        <div class="login picrelated">
             <form action="<?= "http://" . $_SERVER['SERVER_NAME'] . "/auth"; ?>" class="form" method="post">
             <h1></h1>
                 <div class="control-group">

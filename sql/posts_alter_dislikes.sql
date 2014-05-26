@@ -1,0 +1,1 @@
+ALTER TABLE `posts` ADD `dislikes` int(32) NOT NULL;

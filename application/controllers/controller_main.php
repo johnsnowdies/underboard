@@ -11,7 +11,7 @@ class Controller_Main extends Controller
     	$pagelink = 'http://'.$this->request->server->SERVER_NAME.'/main/page/';
 		
 		if ($current > 0) 
-    		$pagination[] = array('class'=>'page', 'link' => $pagelink.($current-1), 'value' => '<i class="icon-chevron-left"></i>');
+    		$pagination[] = array('class'=>'page', 'link' => $pagelink.($current-1), 'value' => '<i class="icon-chevron-left icon-white"></i>');
     	
     	for ($i = 0; $i < $pages; $i++ )
     		if ($i == $current)
@@ -20,7 +20,7 @@ class Controller_Main extends Controller
     			$pagination[] = array('class'=>'page','link' => $pagelink.$i, 'value' => $i);
     	
     	if ($current < ($pages-1))	
-    		$pagination[] = array('class'=>'page', 'link' => $pagelink.($current+1), 'value' => '<i class="icon-chevron-right"></i>');
+    		$pagination[] = array('class'=>'page', 'link' => $pagelink.($current+1), 'value' => '<i class="icon-chevron-right icon-white"></i>');
     	
     	return $pagination;
     }

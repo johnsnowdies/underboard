@@ -1,5 +1,5 @@
 <!-- Thread page -->
-<div class="navbar navbar-inverse navbar-fixed-top">
+<div class="navbar navbar-fixed-top">
 	<div class="navbar-inner">
 		<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
 			<span class="icon-bar"></span>
@@ -9,13 +9,13 @@
 		<a class="brand" href="/">underboard</a>
 		<div class="nav-collapse collapse">
 			<ul class="nav">
-				<li><a href="/"><i class="icon-home icon-white"></i>&nbsp;Лобби</a></li>
+				<li><a href="/"><i class="icon-home "></i>&nbsp;Лобби</a></li>
             	<li class="active">
 					<a href="/thread/show/<?=$data[0]->id?>">
                 		<span class="label label-important">Текущий тред: #<?=$data[0]->id?></span>
 					</a>
 				</li>
-	            <li><a href="/auth/logout"><i class="icon-off icon-white"></i>&nbsp;Выход</a></li>
+	            <li><a href="/auth/logout"><i class="icon-off "></i>&nbsp;Выход</a></li>
             </ul>
 		</div>
 	</div>
