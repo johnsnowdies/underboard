@@ -9,8 +9,8 @@ input:-webkit-autofill:focus {
 }
 
 body {
-	background-color: #eee;
-	/*background-image: url('/img/low_contrast_linen.png');*/
+
+background:#eee;
 
 }
 
@@ -28,6 +28,11 @@ body {
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eee', endColorstr='#eee', GradientType=1); /* IE6-9 fallback on horizontal gradient */
 
 }
+.loginPage{
+    background-image: url('/img/login.png');
+    background-size: 100% 100%;
+    background-attachment: fixed;
+}
 
 .jumbotron {
     position: relative;
@@ -37,18 +42,20 @@ body {
    
 
     text-shadow: 0 1px 13px rgba(0, 0, 0, .3), 0 0 30px rgba(0, 0, 0, .075);
-     background: #ffffff; /* Old browsers */
-    background: -moz-linear-gradient(45deg, #ffffff 0%, #0099FF 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left bottom, right top, color-stop(0%, #ffffff), color-stop(100%, #0099FF)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(45deg, #ffffff 0%, #0099FF 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(45deg, #ffffff 0%, #0099FF 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(45deg, #ffffff 0%, #0099FF 100%); /* IE10+ */
-    background: linear-gradient(45deg, #ffffff 0%, #0099FF 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eee', endColorstr='#eee', GradientType=1); /* IE6-9 fallback on horizontal gradient */
+    /*
+     background: #ffffff; 
+    background: -moz-linear-gradient(45deg, #ffffff 0%, #0099FF 100%); 
+    background: -webkit-gradient(linear, left bottom, right top, color-stop(0%, #ffffff), color-stop(100%, #0099FF)); 
+    background: -webkit-linear-gradient(45deg, #ffffff 0%, #0099FF 100%); 
+    background: -o-linear-gradient(45deg, #ffffff 0%, #0099FF 100%); 
+    background: -ms-linear-gradient(45deg, #ffffff 0%, #0099FF 100%); 
+    background: linear-gradient(45deg, #ffffff 0%, #0099FF 100%); 
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eee', endColorstr='#eee', GradientType=1); 
 
       box-shadow: 0 -18px 32px #000000;
     -moz-box-shadow: 0 -18px 32px #000000;
     -webkit-box-shadow: 0 -18px 32px #000000;
+    */
 
 }
 .jumbotron h1 {
@@ -116,17 +123,7 @@ body {
         z-index: 2;
     }
 
-    .jumbotron:after {
-        content: '';
-        display: block;
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        background: url(/img/bs-docs-masthead-pattern.png) repeat center center;
-        opacity: .4;
-    }
+ 
 
     @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (   min--moz-device-pixel-ratio: 2), only screen and (     -o-min-device-pixel-ratio: 2/1) {
 
@@ -170,11 +167,6 @@ body {
     
 	.container {margin-top: 50px;}
 
-        body {
-            
-/*            color: #eee;*/
-color: #222;
-        }
 
         .well {
             border-radius: 0;
@@ -189,8 +181,10 @@ color: #222;
         }
 
         p.postbody {
-            font-family: helvetica;
-        }
+        /*    font-family: helvetica;*/
+font-family: helvetica neue;
+font-size: 16px;
+                }
 
         span.big {
             font-size: 2em;
@@ -262,10 +256,11 @@ color: #222;
         .navlink{
             /*color:#a6e22e;*/
             color: #41D74D;
+            color: #0088CC;
         }
 
         .quote{
-            color:#a6e22e;   
+            color:#0088CC;   
         }
 
         .image-holder{
@@ -387,12 +382,36 @@ color: #222;
        
     	
     .picrelated {
-
+/*
     -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.5), 0 0 40px rgba(0, 0, 0, 0.1) inset;
        -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.5), 0 0 40px rgba(0, 0, 0, 0.1) inset;
-            box-shadow:0 1px 4px rgba(0, 0, 0, 0.5), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+            box-shadow:0 1px 4px rgba(0, 0, 0, 0.5), 0 0 40px rgba(0, 0, 0, 0.1) inset;*/
 }
  
 .well{
     box-shadow: none !important;
+}
+
+.navbar-inner {
+    background-color: #FAFAFA;
+    background-image: none;
+    background-repeat: repeat-x;
+    border: 1px solid #D4D4D4;
+    border-radius: 4px;
+    box-shadow: none;
+    min-height: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.btn-group > .popover {
+    font-size: 13px;
+}
+
+.navbar .nav > .active > a, .navbar .nav > .active > a:hover, .navbar .nav > .active > a:focus {
+    box-shadow: none;
+}
+
+.navbar-fixed-top .navbar-inner, .navbar-static-top .navbar-inner {
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
 }

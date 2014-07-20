@@ -1,31 +1,37 @@
 <!-- Login page-->
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('body').attr('class','loginPage');
+    });
+
+</script>
 
 <div class="jumbotron masthead visible-desktop visible-tablet">
     <h1>Underboard</h1>
    <br>
      <div style="text-align: left;
 width: 430px;
-color:#444;
+color:#fff;
 height: 72px;
-font-style: italic;" class="login">
+font-style: italic;text-shadow:0 1px 0 rgba(1, 1, 1, 0.5), 0 0 30px rgba(255, 255, 255, 0.125);" class="login">
             Кого здесь только нет - наркоман, графоман, депрессующий, обезумевшие патриот и русофоб, еврей, девственники и безотцовщины! Здесь все мои друзья!<br>
-            <span style="float:right;color:#444;">Anonymous</span>
+            <span style="float:right;color:#fff;text-shadow:0 1px 0 rgba(1, 1, 1, 0.5), 0 0 30px rgba(255, 255, 255, 0.125);">Anonymous</span>
     </div>
 </div>
 
 <div class="container">
     
     <div class="phone-logo visible-phone ">
-	    <h1>Underboard</h1>
+	    <h1 style="color:#fff;text-shadow: 0 1px 13px rgba(0, 0, 0, 0.3), 0 0 30px rgba(0, 0, 0, 0.075);">Underboard</h1>
 		<!--<center><p>&#946;eta - moblie</p></center>-->
-        <div style="text-align: left;font-style:italic;font-size:12px;color:#222; ">
+        <div style="text-align: left;font-style:italic;font-size:12px;color:#fff; ">
             Кого здесь только нет - наркоман, графоман, депрессующий, обезумевшие патриот и русофоб, еврей, девственники и безотцовщины! Здесь все мои друзья!<br>
-         <span style="float:right;color:#222;">Anonymous</span>
+         <span style="float:right;color:#fff;">Anonymous</span>
          
 	   </div>
        <br><br>
     </div>
-	<?= $data?>
+	<?=$data?>
         <div class="login picrelated">
             <form action="<?= "http://" . $_SERVER['SERVER_NAME'] . "/auth"; ?>" class="form" method="post">
             <h1></h1>

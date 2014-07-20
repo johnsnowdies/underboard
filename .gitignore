@@ -3,3 +3,4 @@ application/core/config.php
 .project
 .buildpath
 .debug
+logs
