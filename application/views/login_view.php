@@ -28,7 +28,7 @@ font-style: italic;text-shadow:0 1px 0 rgba(1, 1, 1, 0.5), 0 0 30px rgba(255, 25
 
       <?=$data?>
         <div class="login picrelated">
-            <form action="<?= "https://" . $_SERVER['SERVER_NAME'] . "/auth"; ?>" class="form" method="post">
+            <form action="/auth" class="form" method="post">
             <h1></h1>
                 <div class="control-group">
                     <div class="controls">

@@ -14,7 +14,7 @@ class Controller_Image extends Controller
 	
 	function action_show($id){
 		if (Auth::isAuth()) {
-			$extars = 'https://'.$this->request->server->SERVER_NAME.'/image/big/'.$id;
+			$extars = '/image/big/'.$id;
 			$this->view->generate('image_view.php', 'template_view.php',null,$id,$extars);
 		}else
 			Route::ErrorPage404();

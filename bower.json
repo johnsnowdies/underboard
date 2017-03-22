@@ -1,0 +1,23 @@
+{
+  "name": "underboard",
+  "homepage": "https://github.com/johnsnowdies/underboard",
+  "authors": [
+    "Sergey Chanyshev <contact@eslider.me>"
+  ],
+  "description": "Personal private anonymous forum",
+  "main": "index.php",
+  "license": "GPL",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "bootstrap-toggle": "^2.2.2",
+    "font-awesome": "^4.7.0"
+  }
+}

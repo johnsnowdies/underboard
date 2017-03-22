@@ -1,4 +1,5 @@
 application/core/config.php
+bower_components
 .settings
 .project
 .buildpath

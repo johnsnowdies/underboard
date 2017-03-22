@@ -1,24 +1,39 @@
-<!-- Main page -->
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="navbar-inner ">
-          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-            <a class="brand" href="/">underboard</a>
-            <div class="nav-collapse collapse">
-            <ul class="nav">
-                <li class="active"><a href="/"><i class="icon-home"></i>&nbsp;Лобби</a></li>
-                <li class="visible-desktop"><a style="cursor: pointer;" data-toggle="modal" data-target="#postForm"><i class="icon-plus "></i>&nbsp;Новая тема</a></li>
-                <li class="visible-phone visible-tablet"><a href="/thread"><i class="icon-plus "></i>&nbsp;Новая тема</a></li>
+<style>
+    .toggle.ios, .toggle-on.ios, .toggle-off.ios { border-radius: 20px; }
+    .toggle.ios .toggle-handle { border-radius: 20px; }
+</style>
+
+<nav class="navbar navbar-inverse navbar-default navbar-static-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"  aria-expanded="false" >
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Underboard</a>
+
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/"><i class="fa fa-home"></i>&nbsp;Лобби</a></li>
+                <li><a style="cursor: pointer;"><i class="fa fa-plus "></i>&nbsp;Новая тема</a></li>
                 <li><a href="/auth/logout"><i class="icon-off "></i>&nbsp;Выход</a></li>
             </ul>
-            </div>
-        </div>
-    </div>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+
    
-    <div id="postForm" class="modal hide fade in large"  tabindex="-1"  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade"  tabindex="-1" id="postForm"  role="dialog" aria-labelledby="myModalLabel" >
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
         <div class="modal-header">
         	   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             <h3 id="myModalLabel">Новая тема</h3>
@@ -51,6 +66,10 @@
   					<a class="btn text-format" id="spoiler"><span class="spoiler">спойлер</span></a>
 				</div>
 			</div>
+
+                </div>
+            </div>
+
 		</div>
                
 
@@ -85,22 +104,32 @@
 
     <div class="container">
     <? foreach($data as $post){?>
+
+
             <div class="row post">
+
+                <!--
                 <div class="span1 visible-desktop visible-tablet">
-                    <span class="counter label label-inverse visible-desktop" style="float: right;"><?=$post->count?></span>
+                    <span class="counter label label-inverse visible-desktop" style="float: right;"></span>
                     <span class="counter-tablet label label-inverse visible-tablet" style="float: right;"><?=$post->count?></span>
                 </div>
-                <div class="span10 well">
-                    <div class="row">
-                        <div class="span9">
-                                <a href="/thread/show/<?=$post->id?>" >
-                                    <span class="big"><?=$post->title?></span>
-                                </a>
+                -->
+
+                <div class="col-md-12">
+                    <div class="row post-top" >
+                        <div class="col-md-12">
+                            <span class="post-header"><a href="/thread/show/<?=$post->id?>"><?=$post->title?></a>&nbsp;<small>#<?=$post->id?></small></span>
                         </div>
-                        <div class="span1 visible-desktop visible-tablet">
-                            <span class="badge badge-important" style="float:right;">#<?=$post->id?></span>
+                        <div class="col-md-8">
+                            <span class="post-subheader">ответов: <?=$post->count?></span>
                         </div>
-                        <p class="phone-inform visible-phone ">#<?=$post->id?>, ответов - <?=$post->count?></p>
+
+                        <div class="col-md-4" style="text-align: right">
+                            <span class="post-subheader">Написал <?= $post->author?> - <?= $post->timestamp?></span>
+                        </div>
+
+
+
                     </div>
                     
                     <? if(!empty($post->mime)){ ?>
@@ -109,9 +138,9 @@
                         </a>
                     <? } ?>
                     
-                        <p class="postbody"><?=$post->body ?></p>
+                    <p class="postbody"><?=$post->body ?></p>
 
-                    <span class="label label-inverse" style="height: 15px;">Написал <?= $post->author?> - <?= $post->timestamp?></span>
+
                 </div>
             </div>
     <? } ?>

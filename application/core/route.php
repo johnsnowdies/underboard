@@ -58,7 +58,7 @@ class Route{
 
     static function ErrorPage404(){
     	$request = new Request();
-        $host = 'https://'.$request->server->HTTP_HOST.'/';
+        $host = '/';
         /* Тут правильно сделать: 
          * header('HTTP/1.1 404 Not Found');
          * header("Status: 404 Not Found");
@@ -69,7 +69,7 @@ class Route{
     
     static function IndexPage(){
     	$request = new Request();
-    	$host = 'https://'.$request->server->HTTP_HOST.'/';
+    	$host = '/';
     	header('Location:' . $host);
     }
 

@@ -1,0 +1,49 @@
+@import "http://fonts.fontstorage.com/import/opensans.css";
+@import "http://fonts.fontstorage.com/import/bitter.css";
+
+body{
+    background-image: url("img/stardust.png");
+    color:#eeeeee;
+    font-family: 'Open Sans';
+
+}
+
+a{
+    color: #2a7aef;
+}
+
+.navbar{
+    background: rgba(0,0,0,0.69);
+    border-bottom: 0px;
+}
+
+.post-top{
+    border-bottom: 1px solid rgba(255,255,255,0.09);
+    padding-top:15pt;
+    padding-bottom: 5pt;
+    margin-bottom: 7pt;
+
+}
+
+.post-header{
+    font-family: 'Open Sans';
+    font-weight: lighter;
+    font-size: 20pt;
+    line-height: 1pt;
+}
+
+.post-subheader{
+    font-family: 'Open Sans';
+    font-weight: lighter;
+    font-size: 10pt;
+    line-height: 1pt;
+    color:#8c8c8c;
+    margin-left: 1pt;
+
+}
+
+.post{
+
+    background: rgba(0,0,0,0.09);
+
+}
