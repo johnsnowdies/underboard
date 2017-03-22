@@ -3,7 +3,7 @@
  *
  * Copyright Jordan Schroter
  * Licensed under the Apache License v2.0
- * https://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  */
 
@@ -47,10 +47,10 @@
 
 .modal.fade {
 	top: -100%;
-	-webkit-transition: opacity 0.3s linear, top 0.3s ease-out, bottom 0.3s ease-out, margin-top 0.3s ease-out;	
-	   -moz-transition: opacity 0.3s linear, top 0.3s ease-out, bottom 0.3s ease-out, margin-top 0.3s ease-out;
-	     -o-transition: opacity 0.3s linear, top 0.3s ease-out, bottom 0.3s ease-out, margin-top 0.3s ease-out;
-	        transition: opacity 0.3s linear, top 0.3s ease-out, bottom 0.3s ease-out, margin-top 0.3s ease-out;
+	-webkit-transition: opacity 0.3s linear, top 0.3s ease-out, bottom 0.3s ease-out, margin-top 0.3s ease-out;
+	-moz-transition: opacity 0.3s linear, top 0.3s ease-out, bottom 0.3s ease-out, margin-top 0.3s ease-out;
+	-o-transition: opacity 0.3s linear, top 0.3s ease-out, bottom 0.3s ease-out, margin-top 0.3s ease-out;
+	transition: opacity 0.3s linear, top 0.3s ease-out, bottom 0.3s ease-out, margin-top 0.3s ease-out;
 }
 
 .modal.fade.in {
@@ -82,7 +82,7 @@
 	z-index: 940;
 }
 
-.modal-backdrop, 
+.modal-backdrop,
 .modal-backdrop.fade.in{
 	opacity: 0.7;
 	filter: alpha(opacity=70);
@@ -90,8 +90,8 @@
 }
 
 .modal.container {
-  width: 940px;
-  margin-left: -470px;
+	width: 940px;
+	margin-left: -470px;
 }
 
 /* Modal Overflow */
@@ -123,7 +123,7 @@
 }
 
 @media (max-width: 979px) {
-	.modal, 
+	.modal,
 	.modal.container,
 	.modal.modal-overflow 	{
 		top: 1%;
@@ -135,14 +135,14 @@
 		margin: 0 !important;
 		padding: 0 !important;
 	}
-	
-	.modal.fade.in, 
+
+	.modal.fade.in,
 	.modal.container.fade.in,
 	.modal.modal-overflow.fade.in {
 		top: 1%;
 		bottom: auto;
 	}
-	
+
 	.modal-body,
 	.modal-overflow .modal-body {
 		position: static;
@@ -151,7 +151,7 @@
 		max-height: none !important;
 		overflow: visible !important;
 	}
-	
+
 	.modal-footer,
 	.modal-overflow .modal-footer {
 		position: static;
@@ -166,20 +166,20 @@
 }
 
 /*
-Animate.css - https://daneden.me/animate
-Licensed under the в�є license (https://licence.visualidiot.com/)
+Animate.css - http://daneden.me/animate
+Licensed under the в�є license (http://licence.visualidiot.com/)
 
 Copyright (c) 2012 Dan Eden*/
 
 .animated {
 	-webkit-animation-duration: 1s;
-	   -moz-animation-duration: 1s;
-	     -o-animation-duration: 1s;
-	        animation-duration: 1s;
+	-moz-animation-duration: 1s;
+	-o-animation-duration: 1s;
+	animation-duration: 1s;
 	-webkit-animation-fill-mode: both;
-	   -moz-animation-fill-mode: both;
-	     -o-animation-fill-mode: both;
-	        animation-fill-mode: both;
+	-moz-animation-fill-mode: both;
+	-o-animation-fill-mode: both;
+	animation-fill-mode: both;
 }
 
 @-webkit-keyframes shake {

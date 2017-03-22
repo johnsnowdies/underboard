@@ -1,5 +1,5 @@
 <!-- Main page -->
-    <div class="navbar navbar navbar-fixed-top">
+    <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="navbar-inner ">
           <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
             <span class="icon-bar"></span>

@@ -42,26 +42,33 @@ class Controller_Reply extends Controller
                     	$extension = strtolower($extension);
                     	
                    		$fp      = fopen($tmpName, 'r');
-                   		$content = fread($fp, filesize($tmpName));
+                   		$content = fread($fp, $fileSize);
                    		fclose($fp);
                     		
                    	    $thumb = PhpThumbFactory::create($tmpName);
                    		$thumb->resize(400);
+
+                        $tmpThumb = $_SERVER['DOCUMENT_ROOT'].'/public/uploads/thumbs/'.rand(1000000, 3500000).'.jpg';
+                        $thumb->save($tmpThumb, 'jpg');
+
+                        $fp      = fopen($tmpThumb, 'r');
+                        $thumb = fread($fp, filesize($tmpThumb));
+
+
+                        fclose($fp);
+
+                        //unlink($tmpThumb);
+
+
                     		
-                   		$tmpThumb = rand(1000000, 3500000).'.jpg';
-                   		$thumb->save($tmpThumb, 'jpg');
-                    		
-                   		$fp      = fopen($tmpThumb, 'r');
-                   		$thumb = fread($fp, filesize($tmpThumb));
-                   		fclose($fp);
-                    		
-                   		unlink($tmpThumb);
+                        $this->model->insert_Reply($title, $this->request->post->body, $this->request->post->author, $this->request->post->parent,$thumb,$content,$extension );
                 	}
+                	else{
+                        $this->model->insert_Reply($title, $this->request->post->body, $this->request->post->author, $this->request->post->parent);
+                    }
                 
-                	if ($this->request->files->inputImage->size > 0 && !$imgError)
-	                    $this->model->insert_Reply($title, $this->request->post->body, $this->request->post->author, $this->request->post->parent,$thumb,$content,$extension );
-    	            else
-        	            $this->model->insert_Reply($title, $this->request->post->body, $this->request->post->author, $this->request->post->parent);
+
+
 
             	    if (!$this->request->post->parent) 
                 		header('Location: /');
