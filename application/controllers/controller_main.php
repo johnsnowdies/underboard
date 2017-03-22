@@ -8,7 +8,7 @@ class Controller_Main extends Controller
     }
     
     function make_pagination($pages,$current){
-    	$pagelink = 'http://'.$this->request->server->SERVER_NAME.'/main/page/';
+    	$pagelink = 'https://'.$this->request->server->SERVER_NAME.'/main/page/';
 		
 		if ($current > 0) 
     		$pagination[] = array('class'=>'page', 'link' => $pagelink.($current-1), 'value' => '<i class="icon-chevron-left icon-white"></i>');
@@ -30,7 +30,7 @@ class Controller_Main extends Controller
     			$pages 	 = $this->model->get_pages_count();
     			$data = $this->model->get_threads(0);
 				$extars = $this->make_pagination($pages, 0);
-				$post_reply = 'http://' . $this->request->server->SERVER_NAME . '/reply';
+				$post_reply = 'https://' . $this->request->server->SERVER_NAME . '/reply';
     			$this->view->generate('main_view.php', 'template_view.php', $data, $post_reply, $extars );
     	}else
     		$this->view->generate('login_view.php', 'template_view.php');
@@ -42,7 +42,7 @@ class Controller_Main extends Controller
     			$pages 	 = $this->model->get_pages_count();
     			$data = $this->model->get_threads($page);
     			$extars = $this->make_pagination($pages, $page);
-    			$post_reply = 'http://' . $this->request->server->SERVER_NAME . '/reply';
+    			$post_reply = 'https://' . $this->request->server->SERVER_NAME . '/reply';
     			$this->view->generate('main_view.php', 'template_view.php', $data, $post_reply, $extars );
     	}else
     		Route::ErrorPage404();

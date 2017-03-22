@@ -4,7 +4,7 @@
     <div class="row">
         <div class="span3"></div>
         <div class="span6">
-            <form action="<?= "http://" . $_SERVER['SERVER_NAME'] . "/auth"; ?>" class="form-horizontal"
+            <form action="<?= "https://" . $_SERVER['SERVER_NAME'] . "/auth"; ?>" class="form-horizontal"
                   method="post">
                 <div class="control-group">
                     <label class="control-label" for="inputEmail">Email</label>

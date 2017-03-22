@@ -7,7 +7,7 @@
 			<div class="hero-unit">
 				<h1>Успех</h1>
 				<p>Вы можете воспользоваться новыми доступами, что бы войти на сайт.</p>
-				<a href="<?= "http://" . $_SERVER['SERVER_NAME'] . "/auth/logout"; ?>">Перезайти</a>
+				<a href="<?= "https://" . $_SERVER['SERVER_NAME'] . "/auth/logout"; ?>">Перезайти</a>
 			</div>
 		</div>
 	</div>

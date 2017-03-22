@@ -1,6 +1,6 @@
 -- phpMyAdmin SQL Dump
 -- version 3.5.2.2
--- http://www.phpmyadmin.net
+-- https://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1
 -- Время создания: Июн 10 2013 г., 01:20

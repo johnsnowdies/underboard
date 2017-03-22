@@ -1,6 +1,6 @@
 -- phpMyAdmin SQL Dump
 -- version 3.4.10.1deb1
--- http://www.phpmyadmin.net
+-- https://www.phpmyadmin.net
 --
 -- Хост: localhost
 -- Время создания: Май 16 2013 г., 06:40
